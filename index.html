@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html ng-app="ng-shop" ng-controller="MainCtrl">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+    <title>ng-shop</title>
+
+    <!--/.alv-ch-ng.bootstrap -->
+    <link rel="stylesheet" type="text/css" href="/lib/alv-ch-ng/dist/css/alv-ch-bootstrap.min.css"/>
+
+    <!--/.css - essentials -->
+    <link rel="stylesheet" type="text/css" href="/lib/iCheck/skins/all.css"/>
+    <link rel="stylesheet" type="text/css" href="/lib/bootstrap-select/bootstrap-select.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/lib/blueimp-file-upload/css/jquery.fileupload.css"/>
+    <link rel="stylesheet" type="text/css" href="/lib/blueimp-file-upload/css/jquery.fileupload-ui.css"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-inverse" role="navigation" id="navbar">
+    <div class="container">
+        <div class="navbar-header">
+            <div class="navbar-brand">
+                <a href="/">ng-shop</a>
+            </div>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="#/produkte">Produkte</a></li>
+            <li><a href="#/abholung">Abholung und Zahlungsbedingungen</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#/cart" class="pointer">Warenkorb</a>
+            </li>
+            <li class="dropdown">
+                <a href="#/login" class="pointer">Anmelden</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<!--/.navbar -->
+
+<div class="system-messages">
+    <!-- message service controller -->
+</div>
+<!--/.system messages -->
+
+<div class="container" style="min-height: 100%">
+
+    <div id="alv-divider">
+        <ol class="breadcrumb">
+            <li class="active">Startseite</li>
+        </ol>
+        <!--/.breadcrumbs -->
+    </div>
+
+    <ng-view></ng-view>
+
+</div>
+<!--./container -->
+
+<div id="footer-container">
+    <hr id="footer" scroll-fix scroll-fix-bottom="footer-content" />
+    <div id="footer-content" class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9">
+                    &copy; github.com/tdascoli
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/.footer -->
+
+<!--/.core -->
+<script type="text/javascript" src="/lib/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="/lib/angular/angular.min.js"></script>
+<script type="text/javascript" src="/lib/angular-route/angular-route.min.js"></script>
+<script type="text/javascript" src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/lib/bootstrap-select/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="/lib/nya-bootstrap-select/src/nya-bootstrap-select.js"></script>
+<script type="text/javascript" src="/lib/iCheck/icheck.min.js"></script>
+<script type="text/javascript" src="/lib/jquery-i18n-property/jquery.i18n.properties.js"></script>
+
+<script type="text/javascript" src="/lib/angular-ui-bootstrap/src/typeahead/typeahead.js"></script>
+<script type="text/javascript" src="/lib/angular-ui-bootstrap/src/position/position.js"></script>
+<script type="text/javascript" src="/lib/angular-ui-bootstrap/src/bindHtml/bindHtml.js"></script>
+
+<!--/.File Upload -->
+<script type="text/javascript" src="/lib/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="/lib/blueimp-load-image/js/load-image.min.js"></script>
+<script type="text/javascript" src="/lib/blueimp-file-upload/js/jquery.fileupload.js"></script>
+<script type="text/javascript" src="/lib/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
+<script type="text/javascript" src="/lib/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
+<script type="text/javascript" src="/lib/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
+<script type="text/javascript" src="/lib/blueimp-file-upload/js/jquery.fileupload-angular.js"></script>
+
+<!--/.app-modules -->
+<script type="text/javascript" src="/lib/alv-ch-ng/dist/alv-ch-ng.i18n.js"></script>
+<script type="text/javascript" src="/lib/alv-ch-ng/dist/alv-ch-ng.security.js"></script>
+<script type="text/javascript" src="/lib/alv-ch-ng/dist/alv-ch-ng.ui-all.min.js"></script>
+<script type="text/javascript" src="/app/alv-ch-ng.ui-navigation.js"></script>
+
+<script type="text/javascript" src="/app/config.js"></script>
+<script type="text/javascript" src="/app/app.js"></script>
+<script type="text/javascript" src="/app/routing.js"></script>
+<script type="text/javascript" src="/app/MainCtrl.js"></script>
+
+</body>
+</html>

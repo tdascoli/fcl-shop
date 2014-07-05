@@ -1,0 +1,64 @@
+<message message-severity="warning"> There is a planned maintenance in 30 minutes. Please be aware. </message>
+<message message-severity="warning" message-dismissable="true"> <span i18n-msg="testLogin"></span> </message>
+
+<h1>Login, what else</h1>
+
+<h2>Buttons and Modals</h2>
+<div highlight="this">
+    <button data-toggle="modal" data-target="#modalId">
+        Launch demo modal
+    </button>
+
+    <modal modal-title="TEST" modal-id="modalId" modal-form="/#/job/search" modal-submit="Submit">
+        <p>Please don't include any personal or financial information, for example your National Insurance or credit card numbers.</p>
+        <input type="text" form-input="What you were doing" id="exampleInputEmail2" />
+        <input type="text" form-input="What went wrong" id="exampleInputPassword2" />
+    </modal>
+</div>
+
+<h2>Badges</h2>
+<div highlight="this">
+    <a href="#">Inbox <badge>42</badge></a><p />
+
+    <a href="#" badge="21">Outbox</a><p />
+
+    <ul class="nav nav-pills nav-stacked">
+        <li class="active">
+            <a href="#">
+                <badge badge-align="right">42</badge>
+                Home
+            </a>
+        </li>
+        <li>
+            <a href="#" badge-align="right" badge="42">
+                Start
+            </a>
+        </li>
+    </ul>
+</div>
+
+<h2>Labels (Markers)</h2>
+<div highlight="this">
+    <h3>Example heading <marker>New</marker></h3>
+    <h3 marker="old">Example heading</h3>
+
+    <marker>Default</marker>
+    <marker marker-severity="primary">Primary</marker>
+    <marker marker-severity="success">Success</marker>
+    <marker marker-severity="info">Info</marker>
+    <marker marker-severity="warning">Warning</marker>
+    <marker marker-severity="danger">Danger</marker>
+</div>
+
+<h2>Icons</h2>
+<div highlight="this">
+    <glyph icon="star" />
+
+    <button>
+        <glyph icon="star" /> Star
+    </button>
+
+    <button glyph-icon="search" glyph-align="right">
+        Search
+    </button>
+</div>

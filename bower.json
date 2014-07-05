@@ -1,0 +1,26 @@
+{
+  "name": "ng-shop",
+  "version": "0.0.1",
+  "ignore": [
+    ".idea",
+    "demo",
+    "lib",
+    "node_modules",
+    "src",
+    "test",
+    ".bowerrc",
+    ".gitignore",
+    ".jshintignore",
+    ".jshintrc",
+    "ng-shop.iml",
+    "bower.json",
+    "Gruntfile.js",
+    "package.json",
+    "README.md"
+  ],
+  "dependencies": {
+    "angular":"latest",
+    "angular-route":"latest",
+    "alv-ch-ng":"latest"
+  }
+}
