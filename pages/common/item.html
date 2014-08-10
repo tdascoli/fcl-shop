@@ -1,0 +1,20 @@
+<p />
+<div class="row">
+    <img src="/images/tmp/short_tall.png" class="col-md-6" />
+    <div class="col-md-6">
+        <h2>Item Detail</h2>
+        <p />
+        <strong>CHF 40</strong>
+        <hr />
+        Art. 123456.123<br />
+        <img src="/images/10311.gif" />
+        <input form-label="mit Logo (CHF 8)" type="checkbox" value="true" id="logo" />
+        <input form-label="mit Druck (CHF 8)" type="checkbox" value="true" id="druck" ng-model="druck" /><br />
+        <form class="form-inline">
+            <select form-select nya-selectpicker ng-options="label for label in common.size"></select>
+            <input form-label="Anzahl" maxlength="2" form-input type="number" id="qty" class="medium" placeholder="Anzahl" tooltip="Anzahl Artikel" />
+            <input ng-show="druck" form-label="mit Beschriftung" maxlength="3" form-input type="text" id="beschriftung" class="small" placeholder="Druck" tooltip="Mit einem Druck auf dem Artikel (max. 3 Zeichen)" />
+            <button>In den Warenkorb <glyph icon="shopping-cart"></glyph></button>
+        </form>
+    </div>
+</div>

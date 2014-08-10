@@ -1,1 +1,119 @@
-<h1>Warenkorb</h1>
+<p />
+<div class="row">
+    <div class="col-md-9">
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <div class="panel-heading"><strong>Warenkorb</strong></div>
+            <div class="panel-body">
+                <p>((bei vaucher abholen und bezahlen etc..))</p>
+            </div>
+
+            <div class="list-group cart">
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img src="/images/tmp/shirt1.png" class="small" />
+                        </div>
+                        <div class="col-md-8">
+                            <h4 class="list-group-item-heading">Item Detail <small>Art. 123456.123</small></h4>
+                            <p class="list-group-item-text">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <select form-select form-label="Grösse" nya-selectpicker class="medium" ng-options="label for label in size">
+
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <input form-label="Anzahl" maxlength="2" form-input type="number" id="qty" class="medium" placeholder="Anzahl" tooltip="Anzahl Artikel" />
+                                    <input ng-show="druck" form-label="Beschriftung" maxlength="3" form-input type="text" id="beschriftung" class="medium" placeholder="Druck" tooltip="Mit einem Druck auf dem Artikel (max. 3 Zeichen)" />
+                                </div>
+                                <div class="col-md-6">
+                                    <input form-label="mit Logo (CHF 8)" type="checkbox" value="true" id="logo" />
+                                    <input form-label="mit Druck (CHF 8)" type="checkbox" value="true" id="druck" ng-model="druck" />
+                                </div>
+                            </div>
+                            <button glyph-icon="refresh"></button>
+                            <button glyph-icon="trash"></button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img src="/images/tmp/shirt1.png" class="small" />
+                        </div>
+                        <div class="col-md-8">
+                            <h4 class="list-group-item-heading">Item Detail <small>Art. 123456.123</small></h4>
+                            <p class="list-group-item-text">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <select form-select form-label="Grösse" nya-selectpicker class="medium" ng-options="label for label in size">
+
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <input form-label="Anzahl" maxlength="2" form-input type="number" id="qty" class="medium" placeholder="Anzahl" tooltip="Anzahl Artikel" />
+                                    <input ng-show="druck" form-label="Beschriftung" maxlength="3" form-input type="text" id="beschriftung" class="medium" placeholder="Druck" tooltip="Mit einem Druck auf dem Artikel (max. 3 Zeichen)" />
+                                </div>
+                                <div class="col-md-6">
+                                    <input form-label="mit Logo (CHF 8)" type="checkbox" value="true" id="logo" />
+                                    <input form-label="mit Druck (CHF 8)" type="checkbox" value="true" id="druck" ng-model="druck" />
+                                </div>
+                            </div>
+                            <button glyph-icon="refresh"></button>
+                            <button glyph-icon="trash"></button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img src="/images/tmp/shirt1.png" class="small" />
+                        </div>
+                        <div class="col-md-8">
+                            <h4 class="list-group-item-heading">Item Detail <small>Art. 123456.123</small></h4>
+                            <p class="list-group-item-text">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <select form-select form-label="Grösse" nya-selectpicker class="medium" ng-options="label for label in size">
+
+                                    </select>
+                               </div>
+                               <div class="col-md-3">
+                                    <input form-label="Anzahl" maxlength="2" form-input type="number" id="qty" class="medium" placeholder="Anzahl" tooltip="Anzahl Artikel" />
+                                    <input ng-show="druck" form-label="Beschriftung" maxlength="3" form-input type="text" id="beschriftung" class="medium" placeholder="Druck" tooltip="Mit einem Druck auf dem Artikel (max. 3 Zeichen)" />
+                                </div>
+                                <div class="col-md-6">
+                                    <input form-label="mit Logo (CHF 8)" type="checkbox" value="true" id="logo" />
+                                    <input form-label="mit Druck (CHF 8)" type="checkbox" value="true" id="druck" ng-model="druck" />
+                                </div>
+                            </div>
+                            <button glyph-icon="refresh"></button>
+                            <button glyph-icon="trash"></button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <strong>Bestellinformationen</strong>
+            </div>
+            <div class="panel-body">
+                <input type="email" form-input form-label="E-Mail" id="email" />
+                <input type="text" form-input form-label="Vorname / Name" id="name"  />
+                <input type="text" form-input form-label="Telefon" id="telefon"  />
+                <textarea form-textarea form-label="Adresse" id="adresse"></textarea>
+                <hr />
+                <strong>TOTAL CHF 52</strong>
+                <hr />
+                <button class="btn-primary wide">Bestellen</button>
+            </div>
+        </div>
+    </div>
+</div>

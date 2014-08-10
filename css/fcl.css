@@ -1,0 +1,47 @@
+#alv-divider {
+    border-color: #f4d400;
+}
+#footer {
+    border-color: #013299; /* #013299 */
+}
+.footer {
+    background-color: #fff;
+}
+h4, strong, th {
+    font-weight: 700;
+}
+.item {
+    color: #000;
+}
+.item strong {
+    color: #aaaaaa;
+}
+.item:hover {
+    color: #000;
+}
+.item div {
+    padding: 10px;
+    border: 1px solid #fff;
+}
+.item:hover div {
+    border: 1px solid #eee;
+    padding: 10px;
+}
+.item:hover {
+    text-decoration: none;
+}
+input.small,
+select.small {
+    max-width: 4em;
+}
+input.medium,
+select.medium {
+    max-width: 5.5em;
+}
+button.wide {
+    width: 100%;
+}
+
+.cart .list-group-item img {
+    width: 160px;
+}

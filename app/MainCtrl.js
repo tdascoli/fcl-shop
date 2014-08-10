@@ -15,6 +15,12 @@
     as.controller('MainCtrl', function($scope){
        $scope.title="ng-shop";
 
+       $scope.common={};
+
+       $scope.size=['xs','s','m','l','xl','xxl'];
+       $scope.common.size=['xs','s','m','l','xl','xxl'];
+       $scope.common.childrenSize=['xs','s','m','l','xl','xxl'];
+
     });
 
     // file upload

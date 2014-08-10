@@ -1,7 +1,7 @@
 'use strict';
 
 (function(){
-    var as = angular.module($appConfig.app.name, ['ngRoute', 'alv-ch-ng.i18n', 'alv-ch-ng.ui', 'alv-ch-ng.security', 'blueimp.fileupload','ui.bootstrap.typeahead','nya.bootstrap.select']);
+    var as = angular.module($appConfig.app.name, ['ngRoute', 'alv-ch-ng.i18n', 'alv-ch-ng.ui-forms', 'alv-ch-ng.ui-navigation', 'alv-ch-ng.ui', 'alv-ch-ng.security', 'blueimp.fileupload']);
 
 
     as.config(function($routeProvider,$httpProvider,fileUploadProvider){
