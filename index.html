@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 
-    <title>ng-shop</title>
+    <title>fcl-shop</title>
 
     <!--/.alv-ch-ng.bootstrap -->
     <link rel="stylesheet" type="text/css" href="/lib/alv-ch-ng/dist/css/alv-ch-bootstrap.min.css"/>
@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="/css/fcl.css"/>
 
 </head>
-<body>
+<body ng-controller="CartCtrl">
 
 <div class="navbar navbar-inverse" role="navigation" id="navbar" scroll-fix>
     <div class="container">
@@ -36,7 +36,7 @@
             <global-navigation></global-navigation>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#/cart">Warenkorb <badge>0</badge></a>
+                    <a href="#/cart"><span i18n-msg="commonCart"></span> <badge>{{cartQty()}}</badge></a>
                 </li>
             </ul>
         </div>
@@ -49,13 +49,9 @@
 </div>
 <!--/.system messages -->
 
-<div class="container" style="min-height: 100%">
+<div class="container">
 
-    <div id="alv-divider">
-        <ol class="breadcrumb">
-            <li class="active">Startseite</li>
-        </ol>
-        <!--/.breadcrumbs -->
+    <div id="alv-divider" scroll-fix="navbar">
     </div>
 
     <ng-view></ng-view>
@@ -69,7 +65,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <h4>Ausr&uuml;ster</h4>
+                    <h4 i18n-msg="rootOutfitter"></h4>
                     <img src="images/vaucher.png" />
 
                     <img src="images/nike.png" />
@@ -88,6 +84,7 @@
 <script type="text/javascript" src="/lib/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="/lib/angular/angular.min.js"></script>
 <script type="text/javascript" src="/lib/angular-route/angular-route.min.js"></script>
+<script type="text/javascript" src="/lib/angular-cookies/angular-cookies.min.js"></script>
 <script type="text/javascript" src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/lib/bootstrap-select/bootstrap-select.min.js"></script>
 <script type="text/javascript" src="/lib/nya-bootstrap-select/src/nya-bootstrap-select.js"></script>
@@ -97,15 +94,6 @@
 <script type="text/javascript" src="/lib/angular-ui-bootstrap/src/tooltip/tooltip.js"></script>
 <script type="text/javascript" src="/lib/angular-ui-bootstrap/src/position/position.js"></script>
 <script type="text/javascript" src="/lib/angular-ui-bootstrap/src/bindHtml/bindHtml.js"></script>
-
-<!--/.File Upload -->
-<script type="text/javascript" src="/lib/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
-<script type="text/javascript" src="/lib/blueimp-load-image/js/load-image.min.js"></script>
-<script type="text/javascript" src="/lib/blueimp-file-upload/js/jquery.fileupload.js"></script>
-<script type="text/javascript" src="/lib/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
-<script type="text/javascript" src="/lib/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
-<script type="text/javascript" src="/lib/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
-<script type="text/javascript" src="/lib/blueimp-file-upload/js/jquery.fileupload-angular.js"></script>
 
 <!--/.app-modules -->
 <script type="text/javascript" src="/lib/alv-ch-ng/dist/alv-ch-ng.i18n.js"></script>
@@ -118,7 +106,13 @@
 <script type="text/javascript" src="/app/config.js"></script>
 <script type="text/javascript" src="/app/app.js"></script>
 <script type="text/javascript" src="/app/routing.js"></script>
-<script type="text/javascript" src="/app/MainCtrl.js"></script>
+<script type="text/javascript" src="/app/ctrl/MainCtrl.js"></script>
+<script type="text/javascript" src="/app/ctrl/ArticlesCtrl.js"></script>
+<script type="text/javascript" src="/app/ctrl/OrdersCtrl.js"></script>
+<script type="text/javascript" src="/app/ctrl/CartCtrl.js"></script>
+<script type="text/javascript" src="/app/service/ArticlesService.js"></script>
+<script type="text/javascript" src="/app/service/OrdersService.js"></script>
+<script type="text/javascript" src="/app/service/CartService.js"></script>
 
 </body>
 </html>

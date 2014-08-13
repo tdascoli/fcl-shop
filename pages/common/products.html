@@ -1,4 +1,3 @@
-    <h1>FC Länggasse <small>Web Shop</small></h1>
 <p />
 <div class="row">
 
@@ -14,7 +13,7 @@
                             <select form-label="articleSize" form-select nya-selectpicker ng-model="article.size" ng-options="c.value group by c.group for c in size" class="medium" id="size{{article.article_id}}"></select>
                         </div>
                         <div class="col-md-6">
-                            <input form-label="articleQuantity" maxlength="2" form-input type="number" id="qty{{article.article_id}}" class="medium" placeholder="Anzahl" tooltip="Anzahl Artikel" ng-init="article.qty=1" ng-model="article.qty" />
+                            <input form-label="articleQuantity" maxlength="2" form-input type="number" id="qty{{article.article_id}}" class="medium" placeholder="Anzahl" tooltip="Anzahl Artikel" ng-init="article.qty=1" min="1" ng-model="article.qty" />
                         </div>
                     </div>
                     <div class="row">
@@ -26,10 +25,9 @@
                         </div>
                     </div>
                 </div>
-                <h3>CHF {{showStaticPrize(article)}}</h3>
+                <h3>CHF {{showPrize(article)}}</h3>
             </div>
             <button ng-hide="showDetail" ng-click="showDetail=!showDetail"><span i18n-msg="commonAddToCart"></span> <glyph icon="shopping-cart" /></button>
-
             <button ng-show="showDetail" ng-click="addToCart(article)"><span i18n-msg="commonAddToCart"></span> <glyph icon="shopping-cart" /></button>
         </div>
     </div>

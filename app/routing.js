@@ -9,20 +9,18 @@
             text: "Startseite",
             location: "/",
             templateUrl: "/pages/common/welcome.html",
+            controller:"ArticlesCtrl",
             children: [
-                {id:"products", text:"Produkte", location:"/products", templateUrl:"/pages/common/products.html",
-                children: [
-                    {id:"item", text:"Item", location:"/item", templateUrl:"/pages/common/item.html"}
-                ]},
-                {id:"agb",  text:"Abholungs und Zahlungsbedingungen", location:"/agb",   templateUrl:"/pages/common/agb.html"}
+                {id:"agb",  text:"Abholungs und Zahlungsbedingungen", location:"/agb", templateUrl:"/pages/common/agb.html"}
             ]
         }
     ];
 
     NavigationServiceProvider.setModel(model);
 
-    /** cart **/
-    $routeProvider.when('/cart', {templateUrl: '/pages/common/cart.html'});
+    /** cart / order / etc **/
+    $routeProvider.when('/cart', {templateUrl: '/pages/common/cart.html', controller:"ArticlesCtrl"});
+    $routeProvider.when('/order', {templateUrl: '/pages/common/order.html', controller:"OrdersCtrl"});
     /** 404 **/
     $routeProvider.otherwise({templateUrl: '/pages/common/404.html'});
     new RoutingConfigurator().configure(model,$routeProvider);

@@ -10,26 +10,28 @@
 h4, strong, th {
     font-weight: 700;
 }
-.item {
-    color: #000;
-}
-.item strong {
+
+.article strong {
     color: #aaaaaa;
 }
-.item:hover {
-    color: #000;
-}
-.item div {
+.article {
     padding: 10px;
-    border: 1px solid #fff;
+    border: 2px solid #eee;
 }
-.item:hover div {
-    border: 1px solid #eee;
+.article:hover {
+    border: 2px solid #ccc;
     padding: 10px;
 }
-.item:hover {
-    text-decoration: none;
+.article img.small {
+    width: 220px;
+    height: 220px;
 }
+
+.prize {
+    float: right;
+    font-size: 1.25em;
+}
+
 input.small,
 select.small {
     max-width: 4em;
@@ -44,4 +46,7 @@ button.wide {
 
 .cart .list-group-item img {
     width: 160px;
+}
+.modal-dialog {
+    margin: 100px auto;
 }
