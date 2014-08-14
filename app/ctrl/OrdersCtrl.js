@@ -3,7 +3,7 @@
 (function(){
     var as = angular.module($appConfig.app.name);
 
-    as.controller('OrdersCtrl', function($scope,$location,$cookieStore){
+    as.controller('OrdersCtrl', function($scope,$location,$cookieStore,CartService,OrdersService){
        $scope.order;
        $scope.orderValidation=true;
        $scope.noOrders=true;
@@ -29,12 +29,33 @@
                $scope.orderValidation=false;
            }
            else {
+               // angaben merken
                if ($scope.order.saveAddress){
                    $scope.order.saveAddress=null;
                    $cookieStore.put('order',$scope.order);
                }
+               // persist
+
+               OrdersService.putOrder($scope.order,CartService.showCart());
+
+               // empty cart
+               CartService.emptyCart();
+
                $location.path('/order');
            }
        };
+
+       $scope.getOrder=function(){
+           return OrdersService.getOrder();
+       };
+
+        $scope.getOrderArticle=function(){
+            return OrdersService.getOrderArticle();
+        };
+
+       $scope.getOrderId=function(){
+           return OrdersService.getOrderId();
+       };
+
     });
 }());

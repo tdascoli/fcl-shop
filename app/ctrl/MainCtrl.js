@@ -5,24 +5,24 @@
 
     as.controller('MainCtrl', function($scope){
         $scope.size=[
-            {value:'S',group:'Herren'},
-            {value:'M',group:'Herren'},
-            {value:'L',group:'Herren'},
-            {value:'XL',group:'Herren'},
-            {value:'XXL',group:'Herren'},
-            {value:'XS',group:'Kinder'},
-            {value:'S',group:'Kinder'},
-            {value:'M',group:'Kinder'},
-            {value:'L',group:'Kinder'},
-            {value:'XL',group:'Kinder'}
+            {value:'Herren / S',group:'Herren'},
+            {value:'Herren / M',group:'Herren'},
+            {value:'Herren / L',group:'Herren'},
+            {value:'Herren / XL',group:'Herren'},
+            {value:'Herren / XXL',group:'Herren'},
+            {value:'Kinder / XS',group:'Kinder'},
+            {value:'Kinder / S',group:'Kinder'},
+            {value:'Kinder / M',group:'Kinder'},
+            {value:'Kinder / L',group:'Kinder'},
+            {value:'Kinder / XL',group:'Kinder'}
         ];
 
         $scope.menSize=[
-            {value:'S',group:'Herren'},
-            {value:'M',group:'Herren'},
-            {value:'L',group:'Herren'},
-            {value:'XL',group:'Herren'},
-            {value:'XXL',group:'Herren'}
+            {value:'Herren / S',group:'Herren'},
+            {value:'Herren / M',group:'Herren'},
+            {value:'Herren / L',group:'Herren'},
+            {value:'Herren / XL',group:'Herren'},
+            {value:'Herren / XXL',group:'Herren'}
         ];
     });
 }());

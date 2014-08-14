@@ -11,7 +11,7 @@
                 <div ng-show="showDetail">
                     <div class="row">
                         <div class="col-md-6">
-                            <select form-label="articleSize" form-select nya-selectpicker ng-model="article.size" ng-options="c.value group by c.group for c in size" class="medium" id="size{{article.article_id}}"></select>
+                            <select form-label="articleSize" form-select nya-selectpicker ng-model="article.size" ng-options="c.value group by c.group for c in size" class="medium" id="size{{article.article_id}}" ng-init="article.size=size[0]"></select>
                         </div>
                         <div class="col-md-6">
                             <input form-label="articleQuantity" maxlength="2" form-input type="number" id="qty{{article.article_id}}" class="medium" placeholder="Anzahl" tooltip="Anzahl Artikel" ng-init="article.qty=1" ng-model="article.qty" />

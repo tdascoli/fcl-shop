@@ -21,7 +21,6 @@
            return service.cart.length;
         };
 
-        //cookies....
         service.removeFromCart=function(article){
             service.cart.splice( service.cart.indexOf(article), 1 );
             service.addToCookieCart();
@@ -42,7 +41,12 @@
 
         service.addToCookieCart=function(){
             $cookieStore.put('cart',service.cart);
-        }
+        };
+
+        service.emptyCart=function(){
+            service.cart=[];
+            service.addToCookieCart();
+        };
 
        return service;
 

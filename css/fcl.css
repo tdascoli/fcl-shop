@@ -33,11 +33,13 @@ h4, strong, th {
 }
 
 input.small,
-select.small {
+select.small,
+.order-display.small {
     max-width: 4em;
 }
 input.medium,
-select.medium {
+select.medium,
+.order-display.medium {
     max-width: 5.5em;
 }
 button.wide {
@@ -49,4 +51,17 @@ button.wide {
 }
 .modal-dialog {
     margin: 100px auto;
+}
+
+.fake-label {
+    display: inline-block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+.order-display {
+    display: block;
+    border: 2px solid #999;
+    padding: 6px;
+    height: 36px;
 }
