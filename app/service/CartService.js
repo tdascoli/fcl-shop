@@ -48,6 +48,29 @@
             service.addToCookieCart();
         };
 
+        service.showPrize=function(article){
+            var prize;
+            if (article.size.group==="Herren"){
+                prize = +article.prize;
+            }
+            else {
+                prize = +article.children_prize;
+            }
+            var qty=1;
+            if (article.logo_print>0){
+                prize=prize+8;
+            }
+            if (article.order_char_print!==undefined && article.order_char_print.length>0){
+                prize=prize+5;
+            }
+            // qty
+            if (angular.isDefined(article.qty)){
+                qty = article.qty;
+            }
+            prize=prize*qty;
+            return prize;
+        };
+
        return service;
 
     });

@@ -4,7 +4,7 @@
 ((bestellinformationen etc...))
 <div class="panel panel-default">
     <!-- Default panel contents -->
-    <div class="panel-heading"><strong>Bestellung {{getOrderId()}} - {{getOrder().order_date}}</strong></div>
+    <div class="panel-heading"><strong>Bestellung {{getOrder().order_id}} - {{getOrder().order_date}}</strong></div>
     <div class="panel-body">
         <div class="row">
             <div class="col-md-6">
@@ -28,8 +28,8 @@
                 <div class="col-md-3">
                     <img ng-src="{{cartItem.picture}}" class="small" />
                 </div>
-                <div class="col-md-8">
-                    <strong class="prize">CHF {{showPrize(cartItem)}}</strong>
+                <div class="col-md-9">
+                    <strong class="prize">CHF {{cartItem.prize}}</strong>
 
                     <h4 class="list-group-item-heading">{{cartItem.title}}</h4>
 
@@ -45,11 +45,6 @@
                         <div class="col-md-2">
                             <span class="fake-label" i18n-msg="articleQuantity"></span>
                             <span class="order-display medium">{{cartItem.qty}}</span>
-                        </div>
-                        <div class="col-md-2">
-                            <span class="fake-label" i18n-msg="articleLogoPrint"></span>
-                            <span class="order-display medium" i18n-msg="commonYes" ng-show="cartItem.logo_print"></span>
-                            <span class="order-display medium" i18n-msg="commonNo" ng-show="!cartItem.logo_print"></span>
                         </div>
                         <div class="col-md-2">
                             <span class="fake-label" i18n-msg="articleCharPrint"></span>

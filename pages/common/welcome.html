@@ -1,4 +1,4 @@
-    <h1>FC Länggasse <small>Web Shop</small></h1>
+<h1>FC Länggasse <small>Web Shop</small></h1>
 <p />
 <div class="row">
 
@@ -18,19 +18,15 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
-                            <input form-label="articleCharPrintPrize" type="checkbox" value="true" id="druck{{article.article_id}}" ng-model="article.order_char_print_bool" /><br />
-                        </div>
-                        <div class="col-md-6">
-                            <input ng-disabled="!article.order_char_print_bool" form-label="articleCharPrint" maxlength="3" form-input type="text" id="beschriftung{{article.article_id}}" class="medium" placeholder="Druck" tooltip="Mit einem Druck auf dem Artikel (max. 3 Zeichen)" ng-model="article.order_char_print" />
+                        <div class="col-md-12">
+                            <input form-label="articleCharPrintPrize" maxlength="2" form-input type="text" id="beschriftung{{article.article_id}}" class="medium" tooltip="Beschriftung Nummer oder Buchstaben 5cm (max. 2 Zeichen)" ng-model="article.order_char_print" />
                         </div>
                     </div>
                 </div>
-                <h3>CHF {{showStaticPrize(article)}}</h3>
+                <h3>{{showStaticPrize(article,'CHF')}} <span ng-show="{{article.size_type==1}}">/ {{showStaticChildrenPrize(article,'CHF')}} <small>Kinder</small></span></h3>
             </div>
-            <button ng-hide="showDetail" ng-click="showDetail=!showDetail"><span i18n-msg="commonAddToCart"></span> <glyph icon="shopping-cart" /></button>
-
-            <button ng-show="showDetail" ng-click="addToCart(article)"><span i18n-msg="commonAddToCart"></span> <glyph icon="shopping-cart" /></button>
+            <button ng-hide="showDetail" ng-click="showDetail=!showDetail"><span i18n-msg="commonDetails"></span></button>
+            <button ng-show="showDetail" ng-click="addToCart(article);showDetail=!showDetail"><span i18n-msg="commonAddToCart"></span> <glyph icon="shopping-cart" /></button>
         </div>
     </div>
 
