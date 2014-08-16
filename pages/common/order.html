@@ -1,7 +1,6 @@
 <p />
 ((zusammenfassung der bestellung und auch zum ausdrucken und allenfalls vorbeibringen....))
-<p />
-((bestellinformationen etc...))
+<pre>{{ getOrderArticle() | json }}</pre>
 <div class="panel panel-default">
     <!-- Default panel contents -->
     <div class="panel-heading"><strong>Bestellung {{getOrder().order_id}} - {{getOrder().order_date}}</strong></div>
@@ -29,7 +28,7 @@
                     <img ng-src="{{cartItem.picture}}" class="small" />
                 </div>
                 <div class="col-md-9">
-                    <strong class="prize">CHF {{cartItem.prize}}</strong>
+                    <strong class="prize">CHF {{cartItem.order_prize}}</strong>
 
                     <h4 class="list-group-item-heading">{{cartItem.title}}</h4>
 

@@ -27,7 +27,7 @@
         };
 
         service.addToCart=function(article){
-            service.cart.push(article);
+            service.cart.push(angular.copy(article));
             service.addToCookieCart();
         };
 

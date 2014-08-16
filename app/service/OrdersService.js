@@ -17,10 +17,10 @@
             if (order_article.size.group!=="Herren"){
                 size_type=2;
             }
+            order_article.order_prize=CartService.showPrize(order_article);
             order_article.size = size;
             order_article.size_type = size_type;
             order_article.order_id=order_id;
-            order_article.prize=CartService.showPrize(order_article);
             return order_article;
         };
 
@@ -48,6 +48,7 @@
         };
 
         service.putOrder=function(order,cart){
+            service.orderData=[];
             $http.post(orderUrl, order).
                 success(function (data, status) {
                     service.orderData = data;
@@ -62,6 +63,7 @@
         };
 
         service.putOrderArticle=function(article){
+            service.cartData=[];
             $http.post(orderArticleUrl, article).
                 success(function (data, status) {
                     service.cartData.push(data);

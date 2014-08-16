@@ -38,8 +38,9 @@
 
                OrdersService.putOrder($scope.order,CartService.showCart());
 
-               // empty cart
+               // empty cart/order
                CartService.emptyCart();
+               $scope.order={};
 
                $location.path('/order');
            }

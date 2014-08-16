@@ -117,7 +117,7 @@ function getOrderArticles($id) {
 function addOrderArticles() {
     $request = \Slim\Slim::getInstance()->request();
     $order = json_decode($request->getBody());
-    $sql = "INSERT INTO order_article (order_id, article_id, qty, size, logo_print, char_print) VALUES (:orderId, :articleId, :qty, :size, :logoPrint, :orderCharPrint)";
+    $sql = "INSERT INTO order_article (order_id, article_id, qty, size, size_type, logo_print, char_print, order_prize) VALUES (:orderId, :articleId, :qty, :size, :sizeType, :logoPrint, :orderCharPrint, :orderPrize)";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
@@ -125,8 +125,10 @@ function addOrderArticles() {
         $stmt->bindParam("articleId", $order->article_id);
         $stmt->bindParam("qty", $order->qty);
         $stmt->bindParam("size", $order->size);
+        $stmt->bindParam("sizeType", $order->size_type);
         $stmt->bindParam("logoPrint", $order->logo_print);
         $stmt->bindParam("orderCharPrint", $order->order_char_print);
+        $stmt->bindParam("orderPrize", $order->order_prize);
         $stmt->execute();
         $order->order_article_id = $db->lastInsertId();
         $db = null;
