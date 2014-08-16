@@ -72,3 +72,7 @@ button.wide {
 .navbar-nav.navbar-right:last-child {
     margin-right: -15px !important;
 }
+
+.checkbox label span.checkbox-label, .radio label span.radio-label {
+    margin-left: 30px;
+}
