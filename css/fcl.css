@@ -65,3 +65,10 @@ button.wide {
     padding: 6px;
     height: 36px;
 }
+
+.articles.row {
+    margin-bottom: 1.5em;
+}
+.navbar-nav.navbar-right:last-child {
+    margin-right: -15px !important;
+}

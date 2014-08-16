@@ -16,9 +16,8 @@
         }
     ];
 
-    NavigationServiceProvider.setModel(model);
-
-    /** cart / order / etc **/
+    $routeProvider.when('/', {templateUrl: '/pages/common/welcome.html', controller:"ArticlesCtrl"});
+    $routeProvider.when('/agb', {templateUrl: '/pages/common/agb.html'});
     $routeProvider.when('/cart', {templateUrl: '/pages/common/cart.html', controller:"ArticlesCtrl"});
     $routeProvider.when('/order', {templateUrl: '/pages/common/order.html', controller:"OrdersCtrl"});
     /** 404 **/

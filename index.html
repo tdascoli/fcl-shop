@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="/lib/alv-ch-ng/dist/css/alv-ch-bootstrap.min.css"/>
 
     <!--/.css - essentials -->
-    <link rel="stylesheet" type="text/css" href="/lib/bootstrap-select/bootstrap-select.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/lib/bootstrap-select/dist/css/bootstrap-select.min.css"/>
 
     <!--/.css - fcl shop -->
     <link rel="stylesheet" type="text/css" href="/css/fcl.css"/>
@@ -32,9 +32,11 @@
             </div>
         </div>
         <div class="collapse navbar-collapse" id="global-navigation">
-            <global-navigation></global-navigation>
+            <ul class="nav navbar-nav">
+                <li><a href="#/agb">Abholungs und Zahlungsbedingungen</a></li>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
+                <li>
                     <a href="#/cart"><span i18n-msg="commonCart"></span> <badge>{{cartQty()}}</badge></a>
                 </li>
             </ul>
@@ -85,7 +87,7 @@
 <script type="text/javascript" src="/lib/angular-route/angular-route.min.js"></script>
 <script type="text/javascript" src="/lib/angular-cookies/angular-cookies.min.js"></script>
 <script type="text/javascript" src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/lib/bootstrap-select/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="/lib/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 <script type="text/javascript" src="/lib/nya-bootstrap-select/src/nya-bootstrap-select.js"></script>
 <script type="text/javascript" src="/lib/jquery-i18n-property/jquery.i18n.properties.js"></script>
 
@@ -98,7 +100,7 @@
 <script type="text/javascript" src="/lib/alv-ch-ng/dist/alv-ch-ng.i18n.js"></script>
 <script type="text/javascript" src="/lib/alv-ch-ng/dist/alv-ch-ng.security.js"></script>
 <script type="text/javascript" src="/lib/alv-ch-ng/dist/alv-ch-ng.common.min.js"></script>
-<script type="text/javascript" src="/lib/alv-ch-ng/dist/alv-ch-ng.ui-core.min.js"></script>
+<script type="text/javascript" src="/lib/alv-ch-ng/dist/alv-ch-ng.ui-core.js"></script>
 <script type="text/javascript" src="/lib/alv-ch-ng/dist/alv-ch-ng.ui-forms.min.js"></script>
 <script type="text/javascript" src="/lib/alv-ch-ng/dist/alv-ch-ng.ui-navigation.min.js"></script>
 

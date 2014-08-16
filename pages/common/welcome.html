@@ -1,9 +1,9 @@
 <h1>FC Länggasse <small>Web Shop</small></h1>
 <p />
 
-<div class="row">
+<div class="articles row" ng-repeat="article in articlesData" ng-if="$index % 3 == 0">
 
-    <div class="col-md-4" ng-repeat="article in articlesData">
+    <div class="col-md-4" ng-repeat="article in articlesData.slice($index, $index+3)">
         <div class="article">
             <div>
                 <img ng-src="{{article.picture}}" class="small center-block" />
