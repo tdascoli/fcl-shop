@@ -141,7 +141,7 @@ function addOrderArticles() {
 function sendOrders($id) {
     $sql_o = "SELECT * FROM orders WHERE order_id = :id ";
 
-    $sql_oa = "SELECT oa.qty as qty, oa.size as size, oa.logo_print as logo_print, oa.char_print as char_print, a.article_number as article_number, a.title as title, a.prize as prize FROM order_article as oa, articles as a WHERE oa.article_id = a.article_id AND oa.order_id = :id ";
+    $sql_oa = "SELECT oa.qty as qty, oa.size as size, oa.logo_print as logo_print, oa.char_print as char_print, a.article_number as article_number, a.title as title, oa.order_prize as order_prize FROM order_article as oa, articles as a WHERE oa.article_id = a.article_id AND oa.order_id = :id ";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql_o);
@@ -159,7 +159,7 @@ function sendOrders($id) {
 
         // Betreff
         $betreff = 'Ihre Bestellung im FCL-Shop by Vaucher Sports';
-
+        $bestellung='';
         // Nachricht
         foreach ($order_article as $article){
             $bestellung .='<tr>
@@ -169,7 +169,7 @@ function sendOrders($id) {
                             <td>'.$article->size.'</td>
                             <td>'.$article->logo_print.'</td>
                             <td>'.$article->char_print.'</td>
-                            <td>'.$article->prize.'</td>
+                            <td>'.$article->order_prize.'</td>
                           </tr>';
         }
 
