@@ -346,17 +346,6 @@ function findByArticleNumber($query) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
-/*
-function getConnection() {
-    $dbhost="localhost";
-    $dbuser="fclshop";
-    $dbpass="fcl_shop_2014";
-    $dbname="fclaeng_shop";
-    $dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
-    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    return $dbh;
-}
-/*/
 
 function getConnection() {
     $dbhost="127.0.0.1:8889";
