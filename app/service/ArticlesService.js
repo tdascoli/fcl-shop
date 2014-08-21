@@ -15,6 +15,12 @@
                 error(error);
         };
 
+        service.getArticle=function(article_id, success, error){
+            $http({method:'get', url:articleUrl+"/"+article_id}).
+                success(success).
+                error(error);
+        };
+
         service.getArticleDetail=function(articleIds, success, error){
             for (var i=0;i<articleIds.length;i++){
                 $http({method:'get', url:articleIds[i].xlink}).
@@ -30,7 +36,7 @@
         };
 
         service.updateArticle=function(article, success, error){
-            $http.put(articleUrl, article).
+            $http.put(articleUrl+"/"+article.article_id, article).
                 success(success).
                 error(error);
         };

@@ -101,7 +101,7 @@ function addOrder() {
 }
 
 function getOrderArticles($id) {
-    $sql = "select * FROM order_article WHERE order_id = :id ";
+    $sql = "SELECT oa.qty as qty, oa.size as size, oa.logo_print as logo_print, oa.char_print as char_print, oa.article_number as article_number, a.title as title, a.picture as picture, oa.order_prize as order_prize FROM order_article as oa, articles as a WHERE oa.article_id = a.article_id AND oa.order_id = :id ";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
@@ -281,19 +281,21 @@ function addArticle() {
 function updateArticle() {
     $request = \Slim\Slim::getInstance()->request();
     $article = json_decode($request->getBody());
-    $sql = "UPDATE articles SET article_number=:article_number, article_number_children=:article_number_children, title=:title, description=:description, prize=:prize, children_prize=:children_prize, picture=:picture, size_type=:size_type, logo_print=:logo_print, char_print=:char_print WHERE article_id=:article_id";
+    $sql = "UPDATE articles SET article_number=:articleNumber, article_number_children=:articleNumberChildren, title=:title, description=:description, prize=:prize, children_prize=:childrenPrize, picture=:picture, size_type=:sizeType, logo_print=:logoPrint, char_print=:charPrint WHERE article_id=:articleId";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
-        $stmt->bindParam("article_number", $article->article_number);
-        $stmt->bindParam("article_number_children", $article->article_number_children);
+        $stmt->bindParam("articleId", $article->article_id);
+        $stmt->bindParam("articleNumber", $article->article_number);
+        $stmt->bindParam("articleNumberChildren", $article->article_number_children);
+        $stmt->bindParam("title", $article->title);
         $stmt->bindParam("description", $article->description);
         $stmt->bindParam("prize", $article->prize);
-        $stmt->bindParam("children_prize", $article->children_prize);
+        $stmt->bindParam("childrenPrize", $article->children_prize);
         $stmt->bindParam("picture", $article->picture);
-        $stmt->bindParam("size_type", $article->size_type);
-        $stmt->bindParam("logo_print", $article->logo_print);
-        $stmt->bindParam("char_print", $article->char_print);
+        $stmt->bindParam("sizeType", $article->size_type);
+        $stmt->bindParam("logoPrint", $article->logo_print);
+        $stmt->bindParam("charPrint", $article->char_print);
         $stmt->execute();
         $db = null;
         echo json_encode($article);

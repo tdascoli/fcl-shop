@@ -3,12 +3,25 @@
 (function () {
     var as = angular.module($appConfig.app.name);
 
-    var url = '/server/';
+    var url = '/articles/';
 
-    as.controller('ArticlesCtrl', function ($scope, ArticlesService) {
+    as.controller('ArticlesCtrl', function ($scope, $location, $routeParams, ArticlesService) {
 
-        $scope.article={};
+        $scope.article={
+            article_number: "",
+            article_number_children: "",
+            title: "",
+            description: "",
+            prize: 0,
+            children_prize: 0,
+            picture: "",
+            size_type: 1,
+            logo_print: false,
+            char_print: false
+        };
+
         $scope.adminMsg=[];
+        $scope.update=false;
 
         var listSuccess = function (data, status) {
             ArticlesService.data = data;
@@ -77,6 +90,39 @@
             $scope.adminMsg.push({severity:'danger',msg:'Der Artikel konnte nicht gespeichert werden.'});
         };
 
+        var editSuccess = function (data, status) {
+            $scope.article=data;
+            if ($scope.article.size_type==='1') {
+                $scope.article.define_size=true;
+                $scope.article.define_children_size=true;
+            }
+            // nur Erwachsenen Grösse
+            else if ($scope.article.size_type==='2'){
+                $scope.article.define_size=true;
+            }
+            // Stulpen
+            else if ($scope.article.size_type==='3'){
+                $scope.article.define_stulpen_size=true;
+            }
+
+            if ($scope.article.logo_print==="1"){
+                $scope.article.logo_print=true;
+            }
+            else {
+                $scope.article.logo_print=false;
+            }
+            if ($scope.article.char_print==="1"){
+                $scope.article.char_print=true;
+            }
+            else {
+                $scope.article.char_print=false;
+            }
+        };
+
+        var editError = function (data, status) {
+            $scope.adminMsg.push({severity:'danger',msg:'Der Artikel kann nicht editiert werden.'});
+        };
+
         var delSuccess = function (data, status) {
             $scope.adminMsg.push({severity:'info',msg:'Der Artikel wurde erfolgreich gelöscht.'});
         };
@@ -98,10 +144,9 @@
             ArticlesService.putArticle($scope.article,success,error);
         };
 
-        $scope.updateArticle=function(article_id){
+        $scope.updateArticle=function(){
             $scope.adminMsg=[];
 
-            /*
             $scope.article.size_type=1;
             if ($scope.article.define_stulpen_size){
                 $scope.article.size_type=3;
@@ -109,9 +154,9 @@
             else if (!$scope.article.define_children_size){
                 $scope.article.size_type=2;
             }
-
-            ArticlesService.updateArticle($scope.article,listSuccess,listError);
-            */
+            ArticlesService.updateArticle($scope.article,success,error);
+            ArticlesService.getArticles(listSuccess, listError);
+            $location.path('/admin');
         };
 
         $scope.deleteArticle=function(article_id){
@@ -123,15 +168,24 @@
             ArticlesService.getArticles(listSuccess, listError);
         };
 
+        $scope.choosePicture=function(picture){
+            $scope.article.picture=picture.url;
+        };
+
         $scope.cancel=function(){
             $scope.article={};
             $location.path('/admin');
         };
 
+        if ($routeParams.articleId){
+            $scope.update=true;
+            ArticlesService.getArticle($routeParams.articleId, editSuccess, editError);
+        }
+
     });
 
     // file upload
-    as.controller('FileUploadController', [
+    as.controller('ShopFileUploadController', [
         '$scope', '$http', '$filter', '$window',
         function ($scope, $http) {
             $scope.options = {

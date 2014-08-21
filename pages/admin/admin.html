@@ -23,7 +23,7 @@
                 </div>
                 <h3>{{showStaticPrize(article,'CHF')}} <span ng-show="{{article.size_type==1}}">/ {{showStaticChildrenPrize(article,'CHF')}} <small>Kinder</small></span></h3>
             </div>
-            <button ng-click="editArticle(article.article_id)">Bearbeiten</button>
+            <a class="btn btn-default" href="#/admin/edit/{{article.article_id}}">Bearbeiten</a>
             <button ng-click="deleteArticle(article.article_id)">Löschen</button>
         </div>
     </div>

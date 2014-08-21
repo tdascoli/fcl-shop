@@ -3,19 +3,18 @@
 (function(){
     var as = angular.module($appConfig.app.name);
 
-    as.controller('OrdersCtrl', function($scope,$location,$cookieStore,CartService,OrdersService){
+    as.controller('OrdersCtrl', function($scope,$location,$cookieStore,$routeParams,CartService,OrdersService){
        $scope.order;
        $scope.orderValidation=true;
        $scope.noOrders=true;
+       $scope.savedOrder=false;
 
-       if (!$scope.order){
-           var order = $cookieStore.get('order');
-           if (order){
-               $scope.order = order;
-           }
-           else {
-               $scope.order={};
-           }
+       if ($routeParams.orderId){
+           $scope.savedOrder=true;
+           OrdersService.getOrderData($routeParams.orderId);
+       }
+       else if (!OrdersService.getOrder() && $location.path()==='/order'){
+           $location.path('/');
        }
 
        $scope.justOrderIt=function(){

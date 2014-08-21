@@ -23,7 +23,12 @@ h4, strong, th {
     padding: 10px;
 }
 .article img.small {
-    width: 220px;
+    max-width: 220px;
+    height: 220px;
+}
+.order img.small {
+    max-width: 220px;
+    width: auto !important;
     height: 220px;
 }
 
