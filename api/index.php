@@ -1,5 +1,6 @@
 <?php
 
+require('connect.php');
 require('Slim/Slim.php');
 \Slim\Slim::registerAutoloader();
 $app = new \Slim\Slim();
@@ -349,13 +350,15 @@ function findByArticleNumber($query) {
     }
 }
 
-function getConnection() {
-    $dbhost="127.0.0.1:8889";
-    $dbuser="root";
-    $dbpass="root";
-    $dbname="fcl-shop";
-    $dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
-    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    return $dbh;
+if (!function_exists('getConnection')){
+    function getConnection() {
+        $dbhost="127.0.0.1:8889";
+        $dbuser="root";
+        $dbpass="root";
+        $dbname="fcl-shop";
+        $dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
+        $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $dbh;
+    }
 }
 ?>
