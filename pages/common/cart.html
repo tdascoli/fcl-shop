@@ -20,7 +20,9 @@
                         </div>
                         <div class="col-md-9">
                             <strong class="prize">CHF {{showPrize(cartItem)}}</strong>
-                            <h4 class="list-group-item-heading">{{cartItem.title}} <small>Art. {{cartItem.article_number}}</small></h4>
+                            <h4 class="list-group-item-heading">
+                                {{cartItem.title}}
+                            </h4>
                             <p />
                             <p class="list-group-item-text">
                             <div class="row">
@@ -31,7 +33,7 @@
                                     <input form-label="articleQuantity" maxlength="2" form-input type="number" id="qty{{cartItem.article_id}}" class="medium" placeholder="Anzahl" tooltip="Anzahl Artikel" ng-model="cartItem.qty" />
                                 </div>
                                 <div class="col-md-3">
-                                    <input form-label="articleCharPrint" maxlength="2" form-input type="text" id="beschriftung{{cartItem.article_id}}" class="medium" placeholder="Druck" tooltip="Beschriftung Nummer oder Buchstaben 5cm (max. 2 Zeichen)" ng-model="cartItem.order_char_print" />
+                                    <input form-label="articleCharPrint" maxlength="2" form-input type="text" id="beschriftung{{cartItem.article_id}}" class="medium" placeholder="Druck" tooltip="Beschriftung Nummer oder Buchstaben 5cm (max. 2 Zeichen)" ng-model="cartItem.order_char_print" ng-disabled="{{cartItem.char_print==0}}" />
                                 </div>
                             </div>
                             <button glyph-icon="refresh"></button> <button glyph-icon="trash" ng-click="removeFromCart(cartItem)"></button>

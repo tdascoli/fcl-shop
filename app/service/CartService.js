@@ -56,6 +56,10 @@
             else {
                 prize = +article.children_prize;
             }
+            if (article.discount>0){
+                prize = prize*(article.discount/100);
+            }
+
             var qty=1;
             if (article.logo_print>0){
                 prize=prize+8;

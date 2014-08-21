@@ -8,46 +8,35 @@
         $scope.showTotalPrize=function(){
             var prize = 0;
             for(var i=0;i<CartService.cartQty();i++){
-                prize=prize+$scope.showPrize(CartService.getCartItem(i));
+                prize=prize+CartService.showPrize(CartService.getCartItem(i));
             }
-            return prize;
+            return accounting.toFixed(prize,2);
         };
 
-        /*$scope.showPrize=function(article){
-            var prize = +article.prize;
-            var qty=1;
-            if (article.logo_print>0){
-                prize=prize+8;
-            }
-            if (article.order_char_print!==undefined && article.order_char_print.length>0){
-                prize=prize+5;
-            }
-            // qty
-            if (angular.isDefined(article.qty)){
-                qty = article.qty;
-            }
-            prize=prize*qty;
-            return prize;
-        };*/
-
         $scope.showPrize=function(article){
-            return CartService.showPrize(article);
+            return accounting.toFixed(CartService.showPrize(article),2);
         };
 
         $scope.showStaticPrize=function(article,currency){
             var prize = +article.prize;
+            if (article.discount>0){
+                prize = prize*(article.discount/100);
+            }
             if (article.logo_print>0){
                 prize=prize+8;
             }
-            return currency+' '+prize;
+            return currency+' '+accounting.toFixed(prize,2);
         };
 
         $scope.showStaticChildrenPrize=function(article,currency){
             var childrenPrize = +article.children_prize;
+            if (article.discount>0){
+                childrenPrize = childrenPrize*(article.discount/100);
+            }
             if (article.logo_print>0){
                 childrenPrize=childrenPrize+8;
             }
-            return currency+' '+childrenPrize;
+            return currency+' '+accounting.toFixed(childrenPrize,2);
         };
 
         $scope.addToCart=function(article,showDetail){

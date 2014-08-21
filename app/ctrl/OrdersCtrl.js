@@ -35,15 +35,17 @@
                    $cookieStore.put('order',$scope.order);
                }
                // persist
-
                OrdersService.putOrder($scope.order,CartService.showCart());
-
                // empty cart/order
                CartService.emptyCart();
                $scope.order={};
 
                $location.path('/order');
            }
+       };
+
+       $scope.renderPrize=function(prize){
+            return accounting.toFixed(prize,2);
        };
 
        $scope.getOrder=function(){

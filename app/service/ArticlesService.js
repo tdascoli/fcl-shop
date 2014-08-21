@@ -23,6 +23,24 @@
             }
         };
 
+        service.putArticle=function(article, success, error){
+            $http.post(articleUrl, article).
+                success(success).
+                error(error);
+        };
+
+        service.updateArticle=function(article, success, error){
+            $http.put(articleUrl, article).
+                success(success).
+                error(error);
+        };
+
+        service.deleteArticle=function(article_id, success, error){
+            $http.delete(articleUrl+"/"+article_id).
+                success(success).
+                error(error);
+        };
+
         return service;
     });
 }());

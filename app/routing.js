@@ -20,6 +20,10 @@
     $routeProvider.when('/agb', {templateUrl: '/pages/common/agb.html'});
     $routeProvider.when('/cart', {templateUrl: '/pages/common/cart.html', controller:"ArticlesCtrl"});
     $routeProvider.when('/order', {templateUrl: '/pages/common/order.html', controller:"OrdersCtrl"});
+
+
+    $routeProvider.when('/admin', {templateUrl: '/pages/admin/admin.html', controller:"ArticlesCtrl"});
+    $routeProvider.when('/admin/edit', {templateUrl: '/pages/admin/edit.html', controller:"ArticlesCtrl"});
     /** 404 **/
     $routeProvider.otherwise({templateUrl: '/pages/common/404.html'});
     new RoutingConfigurator().configure(model,$routeProvider);

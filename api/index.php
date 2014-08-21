@@ -5,12 +5,13 @@ require('Slim/Slim.php');
 $app = new \Slim\Slim();
 
 $app->get('/articles', 'getArticles');
-$app->get('/articles/:id',  'getArticle');
+$app->get('/articles/:id', 'getArticle');
+$app->get('/articles/search/:query', 'findByArticleNumber');
+$app->post('/articles', 'addArticle');
+$app->put('/articles/:id', 'updateArticle');
+$app->delete('/articles/:id', 'deleteArticle');
 
 //$app->get('/articles/search/:query', 'findByName');
-//$app->post('/articles', 'addArticle');
-//$app->put('/articles/:id', 'updateArticle');
-//$app->delete('/articles/:id',   'deleteArticle');
 
 $app->get('/orders/:id',  'getOrder');
 $app->post('/orders/',    'addOrder');
@@ -117,12 +118,13 @@ function getOrderArticles($id) {
 function addOrderArticles() {
     $request = \Slim\Slim::getInstance()->request();
     $order = json_decode($request->getBody());
-    $sql = "INSERT INTO order_article (order_id, article_id, qty, size, size_type, logo_print, char_print, order_prize) VALUES (:orderId, :articleId, :qty, :size, :sizeType, :logoPrint, :orderCharPrint, :orderPrize)";
+    $sql = "INSERT INTO order_article (order_id, article_id, article_number, qty, size, size_type, logo_print, char_print, order_prize) VALUES (:orderId, :articleId, :articleNumber, :qty, :size, :sizeType, :logoPrint, :orderCharPrint, :orderPrize)";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
         $stmt->bindParam("orderId", $order->order_id);
         $stmt->bindParam("articleId", $order->article_id);
+        $stmt->bindParam("articleNumber", $order->article_number);
         $stmt->bindParam("qty", $order->qty);
         $stmt->bindParam("size", $order->size);
         $stmt->bindParam("sizeType", $order->size_type);
@@ -141,7 +143,7 @@ function addOrderArticles() {
 function sendOrders($id) {
     $sql_o = "SELECT * FROM orders WHERE order_id = :id ";
 
-    $sql_oa = "SELECT oa.qty as qty, oa.size as size, oa.logo_print as logo_print, oa.char_print as char_print, a.article_number as article_number, a.title as title, oa.order_prize as order_prize FROM order_article as oa, articles as a WHERE oa.article_id = a.article_id AND oa.order_id = :id ";
+    $sql_oa = "SELECT oa.qty as qty, oa.size as size, oa.logo_print as logo_print, oa.char_print as char_print, oa.article_number as article_number, a.title as title, oa.order_prize as order_prize FROM order_article as oa, articles as a WHERE oa.article_id = a.article_id AND oa.order_id = :id ";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql_o);
@@ -244,37 +246,64 @@ function sendOrders($id) {
         // verschicke die E-Mail
         mail($orders[0]->email, $betreff, $nachricht, $header);
 
-    echo '{"msg":{"text": "email sent to '.$orders[0]->name.' <'.$orders[0]->email.'>" }}';
-    } catch(PDOException $e) {
-        echo '{"error":{"text":'. $e->getMessage() .'}}';
-    }
-}
-/*
-function updateWine($id) {
-    $request = \Slim\Slim::getInstance()->request();
-    $body = $request->getBody();
-    $wine = json_decode($body);
-    $sql = "UPDATE wine SET name=:name, grapes=:grapes, country=:country, region=:region, year=:year, description=:description WHERE id=:id";
-    try {
-        $db = getConnection();
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam("name", $wine->name);
-        $stmt->bindParam("grapes", $wine->grapes);
-        $stmt->bindParam("country", $wine->country);
-        $stmt->bindParam("region", $wine->region);
-        $stmt->bindParam("year", $wine->year);
-        $stmt->bindParam("description", $wine->description);
-        $stmt->bindParam("id", $id);
-        $stmt->execute();
-        $db = null;
-        echo json_encode($wine);
+        echo '{"msg":{"text": "email sent to '.$orders[0]->name.' <'.$orders[0]->email.'>" }}';
     } catch(PDOException $e) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
 
-function deleteWine($id) {
-    $sql = "DELETE FROM wine WHERE id=:id";
+function addArticle() {
+    $request = \Slim\Slim::getInstance()->request();
+    $article = json_decode($request->getBody());
+    $sql = "INSERT INTO articles (article_number, article_number_children, title, description, prize, children_prize, picture, size_type, logo_print, char_print)  VALUES (:articleNumber, :articleNumberChildren, :title, :description, :prize, :childrenPrize, :picture, :sizeType, :logoPrint, :charPrint)";
+    try {
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam("articleNumber", $article->article_number);
+        $stmt->bindParam("articleNumberChildren", $article->article_number_children);
+        $stmt->bindParam("title", $article->title);
+        $stmt->bindParam("description", $article->description);
+        $stmt->bindParam("prize", $article->prize);
+        $stmt->bindParam("childrenPrize", $article->children_prize);
+        $stmt->bindParam("picture", $article->picture);
+        $stmt->bindParam("sizeType", $article->size_type);
+        $stmt->bindParam("logoPrint", $article->logo_print);
+        $stmt->bindParam("charPrint", $article->char_print);
+        $stmt->execute();
+        $article->article_id = $db->lastInsertId();
+        $db = null;
+        echo json_encode($article);
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+function updateArticle() {
+    $request = \Slim\Slim::getInstance()->request();
+    $article = json_decode($request->getBody());
+    $sql = "UPDATE articles SET article_number=:article_number, article_number_children=:article_number_children, title=:title, description=:description, prize=:prize, children_prize=:children_prize, picture=:picture, size_type=:size_type, logo_print=:logo_print, char_print=:char_print WHERE article_id=:article_id";
+    try {
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam("article_number", $article->article_number);
+        $stmt->bindParam("article_number_children", $article->article_number_children);
+        $stmt->bindParam("description", $article->description);
+        $stmt->bindParam("prize", $article->prize);
+        $stmt->bindParam("children_prize", $article->children_prize);
+        $stmt->bindParam("picture", $article->picture);
+        $stmt->bindParam("size_type", $article->size_type);
+        $stmt->bindParam("logo_print", $article->logo_print);
+        $stmt->bindParam("char_print", $article->char_print);
+        $stmt->execute();
+        $db = null;
+        echo json_encode($article);
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+function deleteArticle($id) {
+    $sql = "DELETE FROM articles WHERE article_id=:id";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
@@ -285,6 +314,7 @@ function deleteWine($id) {
         echo '{"error":{"text":'. $e->getMessage() .'}}';
     }
 }
+/*
 function findByName($query) {
     $sql = "SELECT * FROM wine WHERE UPPER(name) LIKE :query ORDER BY name";
     try {
@@ -301,6 +331,32 @@ function findByName($query) {
     }
 }
 */
+function findByArticleNumber($query) {
+    $sql = "SELECT * FROM articles WHERE article_number LIKE :query OR article_number_children LIKE :query  ORDER BY id";
+    try {
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        $query = "%".$query."%";
+        $stmt->bindParam("query", $query);
+        $stmt->execute();
+        $articles = $stmt->fetchAll(PDO::FETCH_OBJ);
+        $db = null;
+        echo json_encode($articles);
+    } catch(PDOException $e) {
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+/*
+function getConnection() {
+    $dbhost="localhost";
+    $dbuser="fclshop";
+    $dbpass="fcl_shop_2014";
+    $dbname="fclaeng_shop";
+    $dbh = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
+    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    return $dbh;
+}
+/*/
 
 function getConnection() {
     $dbhost="127.0.0.1:8889";
@@ -311,5 +367,4 @@ function getConnection() {
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     return $dbh;
 }
-
 ?>

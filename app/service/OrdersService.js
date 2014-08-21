@@ -8,15 +8,19 @@
     as.service('OrdersService', function($http, CartService){
         var service={};
         service.orderData;
+        service.orderEmail={};
         service.cartData=[];
 
         service.prepareOrderArticle=function(order_id,order_article){
             // prepare articles for persisting in db
             var size = order_article.size.value;
             var size_type=1;
+            var article_number = order_article.article_number;
             if (order_article.size.group!=="Herren"){
                 size_type=2;
+                article_number = order_article.article_number_children;
             }
+            order_article.article_number = article_number;
             order_article.order_prize=CartService.showPrize(order_article);
             order_article.size = size;
             order_article.size_type = size_type;
@@ -55,10 +59,22 @@
                     for (var i=0;i<cart.length;i++){
                         service.putOrderArticle(service.prepareOrderArticle(service.orderData.order_id,cart[i]));
                     }
+                    service.sendOrder(service.orderData.order_id);
                 }).
                 error(function (data, status) {
                     console.log(data);
                     console.log(status);
+                });
+        };
+
+        service.sendOrder=function(order_id){
+            $http.get(orderUrl+"/send/"+order_id).
+                success(function (data, status) {
+                    service.orderEmail.sent=true;
+                    service.orderEmail.msg=data;
+                }).
+                error(function (data, status) {
+                    service.emailSent=false;
                 });
         };
 

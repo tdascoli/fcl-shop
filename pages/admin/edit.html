@@ -1,0 +1,38 @@
+<div ng-show="adminMsg.length>0">
+    <message ng-repeat="msg in adminMsg" message-severity="{{msg.severity}}">{{msg.msg}}</message>
+</div>
+<h1>Admin</h1>
+<div class="row">
+    <div class="col-md-4">
+        <input type="text" form-input form-label="articleTitle" id="title" ng-model="article.title" />
+        <textarea form-textarea form-label="articleDescription" id="description" ng-model="article.description"></textarea>
+
+        <input type="checkbox" form-input form-label="articleLogoAvailable" id="logo_print" ng-model="article.logo_print" ng-init="article.logo_print=true" />
+        <input type="checkbox" form-input form-label="articleCharAvailable" id="char_print" ng-model="article.char_print" ng-init="article.char_print=true" />
+        <input type="checkbox" form-input form-label="articleStulpen" id="stulpen" ng-model="article.define_stulpen_size" />
+
+        <select form-label="articlePicture" form-select nya-selectpicker ng-model="article.picture" id="picture"></select>
+
+        <div class="row">
+            <div class="col-md-6">
+                <input type="checkbox" form-input form-label="articleMenSize" id="size" ng-model="article.define_size" ng-init="article.define_size=true" />
+                <input type="text" form-input form-label="articleNumber" id="article_number" ng-model="article.article_number" />
+                <input type="text" form-input form-label="articleMenPrize" id="prize" ng-model="article.prize" />
+            </div>
+            <div class="col-md-6">
+                <input type="checkbox" form-input form-label="articleChildrenSize" id="children_size" ng-model="article.define_children_size" ng-init="article.define_children_size=true" />
+                <input type="text" ng-disabled="!article.define_children_size" form-input form-label="articleNumberChildren" id="children_article_number" ng-model="article.article_number_children" />
+                <input type="text" ng-disabled="!article.define_children_size" form-input form-label="articleChildrenPrize" id="children_prize" ng-model="article.children_prize" />
+            </div>
+        </div>
+
+        <hr />
+
+        <button class="btn-primary" ng-click="putArticle()">Erstellen</button>
+        <button ng-click="cancel()">Abbrechen</button>
+    </div>
+
+    <div class="col-md-4">
+        <pre>{{ article | json }}</pre>
+    </div>
+</div>

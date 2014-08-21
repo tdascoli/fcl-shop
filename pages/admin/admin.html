@@ -1,6 +1,8 @@
-<h1>FC Länggasse <small>Web Shop</small></h1>
-<p />
-
+<div ng-show="adminMsg.length>0">
+    <message ng-repeat="msg in adminMsg" message-severity="{{msg.severity}}">{{msg.msg}}</message>
+</div>
+<h1>Admin <a class="btn btn-default" href="#/admin/edit">Artikel erstellen</a></h1>
+<div ng-controller="ArticlesCtrl">
 <div class="articles row" ng-repeat="article in articlesData" ng-if="$index % 3 == 0">
 
     <div class="col-md-4" ng-repeat="article in articlesData.slice($index, $index+3)">
@@ -8,7 +10,6 @@
             <div>
                 <img ng-src="{{article.picture}}" class="small center-block" />
                 <h4>{{article.title}}</h4>
-                {{article.description}}<hr />
                 <div ng-show="showDetail">
                     <div class="row">
                         <div class="col-md-6">
@@ -18,13 +19,14 @@
                             <input form-label="articleQuantity" maxlength="2" form-input type="number" id="qty{{article.article_id}}" class="medium" placeholder="Anzahl" tooltip="Anzahl Artikel" ng-init="article.qty=1" ng-model="article.qty" />
                         </div>
                     </div>
-                    <input form-label="articleCharPrintPrize" maxlength="2" form-input type="text" id="beschriftung{{article.article_id}}" class="medium" tooltip="Beschriftung Nummer oder Buchstaben 5cm (max. 2 Zeichen)" ng-model="article.order_char_print" ng-show="{{article.char_print==1}}" />
+                    <input form-label="articleCharPrintPrize" maxlength="2" form-input type="text" id="beschriftung{{article.article_id}}" class="medium" tooltip="Beschriftung Nummer oder Buchstaben 5cm (max. 2 Zeichen)" ng-model="article.order_char_print" />
                 </div>
                 <h3>{{showStaticPrize(article,'CHF')}} <span ng-show="{{article.size_type==1}}">/ {{showStaticChildrenPrize(article,'CHF')}} <small>Kinder</small></span></h3>
             </div>
-            <button ng-hide="showDetail" ng-click="showDetail=!showDetail"><span i18n-msg="commonDetails"></span></button>
-            <button ng-show="showDetail" ng-click="addToCart(article);showDetail=!showDetail"><span i18n-msg="commonAddToCart"></span> <glyph icon="shopping-cart" /></button>
+            <button ng-click="editArticle(article.article_id)">Bearbeiten</button>
+            <button ng-click="deleteArticle(article.article_id)">Löschen</button>
         </div>
     </div>
 
+</div>
 </div>
