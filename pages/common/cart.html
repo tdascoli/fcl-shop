@@ -1,5 +1,9 @@
 <message message-severity="danger">DAS IST EINE TESTVERSION - ES WERDEN KEINE BESTELLUNGEN REGISTRIERT</message>
-<div class="row">
+<message message-severity="info" ng-show="showCart().length==0">
+    Es befinden sich keine Artikel im Warenkorb.
+</message>
+
+<div class="row" ng-show="showCart().length>0">
     <div class="col-md-9">
         <div class="panel panel-default">
             <!-- Default panel contents -->
@@ -10,9 +14,6 @@
             </div>
 
             <div class="list-group cart">
-                <div class="list-group-item" ng-show="showCart().length==0">
-                    <strong>Es befinden sich keine Artikel im Warenkorb.</strong>
-                </div>
                 <div class="list-group-item" ng-repeat="cartItem in showCart() track by $index">
                     <div class="row">
                         <div class="col-md-3">
