@@ -57,7 +57,7 @@
                 prize = +article.children_prize;
             }
             if (article.discount>0){
-                prize = prize*(article.discount/100);
+                prize = prize-((article.discount/100) * prize);
             }
 
             var qty=1;

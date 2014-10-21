@@ -256,7 +256,7 @@ function sendOrders($id) {
 function addArticle() {
     $request = \Slim\Slim::getInstance()->request();
     $article = json_decode($request->getBody());
-    $sql = "INSERT INTO articles (article_number, article_number_children, title, description, prize, children_prize, picture, size_type, logo_print, char_print)  VALUES (:articleNumber, :articleNumberChildren, :title, :description, :prize, :childrenPrize, :picture, :sizeType, :logoPrint, :charPrint)";
+    $sql = "INSERT INTO articles (article_number, article_number_children, title, description, prize, children_prize, picture, size_type, logo_print, char_print, discount)  VALUES (:articleNumber, :articleNumberChildren, :title, :description, :prize, :childrenPrize, :picture, :sizeType, :logoPrint, :charPrint, :discount)";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
@@ -270,6 +270,7 @@ function addArticle() {
         $stmt->bindParam("sizeType", $article->size_type);
         $stmt->bindParam("logoPrint", $article->logo_print);
         $stmt->bindParam("charPrint", $article->char_print);
+        $stmt->bindParam("discount", $article->discount);
         $stmt->execute();
         $article->article_id = $db->lastInsertId();
         $db = null;
@@ -282,7 +283,7 @@ function addArticle() {
 function updateArticle() {
     $request = \Slim\Slim::getInstance()->request();
     $article = json_decode($request->getBody());
-    $sql = "UPDATE articles SET article_number=:articleNumber, article_number_children=:articleNumberChildren, title=:title, description=:description, prize=:prize, children_prize=:childrenPrize, picture=:picture, size_type=:sizeType, logo_print=:logoPrint, char_print=:charPrint WHERE article_id=:articleId";
+    $sql = "UPDATE articles SET article_number=:articleNumber, article_number_children=:articleNumberChildren, title=:title, description=:description, prize=:prize, children_prize=:childrenPrize, picture=:picture, size_type=:sizeType, logo_print=:logoPrint, char_print=:charPrint, discount=:discount WHERE article_id=:articleId";
     try {
         $db = getConnection();
         $stmt = $db->prepare($sql);
@@ -297,6 +298,7 @@ function updateArticle() {
         $stmt->bindParam("sizeType", $article->size_type);
         $stmt->bindParam("logoPrint", $article->logo_print);
         $stmt->bindParam("charPrint", $article->char_print);
+        $stmt->bindParam("discount", $article->discount);
         $stmt->execute();
         $db = null;
         echo json_encode($article);

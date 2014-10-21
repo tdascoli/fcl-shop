@@ -19,12 +19,15 @@
 
         $scope.showStaticPrize=function(article,currency){
             var prize = +article.prize;
+            //console.log("init "+prize);
             if (article.discount>0){
-                prize = prize*(article.discount/100);
+                prize = prize-((article.discount/100) * prize);
             }
-            if (article.logo_print>0){
+            //console.log("discount "+article.discount+"% "+prize);
+            if (article.logo_print==='1'){
                 prize=prize+8;
             }
+            //console.log("logo "+prize);
             return currency+' '+accounting.toFixed(prize,2);
         };
 
