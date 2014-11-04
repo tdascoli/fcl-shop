@@ -7,7 +7,7 @@
         <div class="article">
             <button type="button" ng-show="showDetail" ng-click="showDetail=!showDetail" class="close">×</button>
             <div>
-                <img ng-src="{{article.picture}}" class="small center-block" />
+                <img ng-click="showDetail=!showDetail" ng-src="{{article.picture}}" class="pointer small center-block" />
                 <h4>{{article.title}}</h4>
                 <span class="description" ng-text-truncate="article.description"
                         ng-tt-chars-threshold="100"

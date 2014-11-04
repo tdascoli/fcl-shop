@@ -108,6 +108,10 @@
             return service.orderData.order_id;
         };
 
+        service.showTotalOrderPrize=function(){
+            return "Prize";
+        };
+
         return service;
     });
 }());

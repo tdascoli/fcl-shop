@@ -164,6 +164,7 @@ function sendOrders($id) {
         $betreff = 'Ihre Bestellung im FCL-Shop by Vaucher Sports';
         $bestellung='';
         // Nachricht
+        $total_prize=0;
         foreach ($order_article as $article){
             $bestellung .='<tr>
                             <td>'.$article->article_number.'</td>
@@ -174,7 +175,13 @@ function sendOrders($id) {
                             <td>'.$article->char_print.'</td>
                             <td>'.$article->order_prize.'</td>
                           </tr>';
+            $total_prize+=$article->order_prize;
         }
+        // TOTAL
+        $bestellung .='<tr>
+                            <td colspan="6" align="right"><strong>Total</strong></td>
+                            <td>'.$total_prize.'</td>
+                          </tr>';
 
         $nachricht = '
         <html>

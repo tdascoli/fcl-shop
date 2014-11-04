@@ -64,11 +64,8 @@
 
 
         $scope.getOrderDate=function(){
-            console.log($scope.getOrder().order_date);
-            var date = moment($scope.getOrder().order_date,'YYYY-MM-DD HH:mm:ss');
-            return date;
+            return moment($scope.getOrder().order_date,'YYYY-MM-DD HH:mm:ss').format('DD.MM.YYYY HH:mm');
         };
-
 
         $scope.getOrderArticle=function(){
             return OrdersService.getOrderArticle();
