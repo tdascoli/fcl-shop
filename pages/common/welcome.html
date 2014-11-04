@@ -5,6 +5,7 @@
 
     <div class="col-md-4" ng-repeat="article in articlesData.slice($index, $index+3)">
         <div class="article">
+            <button type="button" ng-show="showDetail" ng-click="showDetail=!showDetail" class="close">×</button>
             <div>
                 <img ng-src="{{article.picture}}" class="small center-block" />
                 <h4>{{article.title}}</h4>

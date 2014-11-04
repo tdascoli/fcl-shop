@@ -1,7 +1,7 @@
 'use strict';
 
 (function(){
-    var as = angular.module($appConfig.app.name, ['ngRoute', 'ngCookies', 'alv-ch-ng.i18n', 'alv-ch-ng.ui-forms', 'alv-ch-ng.ui-navigation', 'alv-ch-ng.ui', 'alv-ch-ng.security', 'blueimp.fileupload']);
+    var as = angular.module($appConfig.app.name, ['ngRoute', 'ngCookies', 'alv-ch-ng.i18n', 'alv-ch-ng.ui-forms', 'alv-ch-ng.ui-navigation', 'alv-ch-ng.ui-core', 'alv-ch-ng.security', 'blueimp.fileupload']);
 
     as.config(function($routeProvider,$httpProvider){
        $httpProvider.defaults.headers.useXDomain=true;
@@ -9,7 +9,7 @@
     });
 
     as.config(function(I18nPropertyServiceProvider) {
-        I18nPropertyServiceProvider.setFilePath('i18n/');
+        I18nPropertyServiceProvider.setFilePath('/i18n/');
         I18nPropertyServiceProvider.setDefaultLanguage('de');
         I18nPropertyServiceProvider.setSupportedLanguages(['de']);
         I18nPropertyServiceProvider.setMarkUnresolvedProperties(false);

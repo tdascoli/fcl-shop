@@ -11,101 +11,282 @@
             banner: '/* ' +
                 '<%= pkg.title || pkg.name %> - <%= pkg.version %> - ' +
                 '<%= grunt.template.today("yyyy-mm-dd") %> - ' +
-                'Copyright (c) <%= grunt.template.today("yyyy") %> dasco.li; */\n',
-
+                'Copyright (c) <%= grunt.template.today("yyyy") %> tdascoli; */\n',
             // Task configurations.
             clean: {
-                all: ['dist', 'build'],
-                dist: ['dist'],
-                build: ['build']
+                libs: ['public/lib'],
+                templates: ['public/template']
             },
-            copy: {
-                options: {
-                    banner: '<%= banner %>'
-                },
-                main: {
-                    files: [
-                        // includes files within path
-                        {
-                            expand: true,
-                            flatten: true,
-                            src: [
-                                'src/js/ng-dev.js',
-                                'src/css/ng-dev.css'],
-                            dest: 'dist',
-                            filter: 'isFile'
-                        }
-                    ]
-                }
-            },
-            cssmin: {
-                options: {
-                    banner: '<%= banner %>'
-                },
-                minify: {
-                    expand: true,
-                    cwd: 'dist/css/',
-                    src: ['**/*.css', '!*.min.css'],
-                    dest: 'dist/css/',
-                    ext: '.min.css'
-                }
-            },
-            uglify: {
-                options: {
-                    banner: '<%= banner %>'
-                },
-                ngdev: {
-                    files: {
-                        'dist/alv-ch-ng.i18n.min.js': ['src/js/ng-dev.js']
-                    }
-                }
-            },
-            compress: {
-                main: {
+            jshint: {
+                gruntfile: {
                     options: {
-                        mode: 'gzip'
+                        jshintrc: '.jshintrc'
                     },
-                    files: [
-                        { src: ['dist/ng-dev.min.js'], dest: 'dist' }
-                    ]
+                    src: 'Gruntfile.js'
+                },
+                src: {
+                    options: {
+                        jshintrc: '.jshintrc'
+                    },
+                    src: ['public/**/*.js']
+                },
+                test: {
+                    options: {
+                        jshintrc: 'test/.jshintrc'
+                    },
+                    src: ['test/**/*.js', '!test/dev/*.js', '!test/**/helpers/*.helper.js']
                 }
             },
-            // unit testing with jasmine
-            jasmine: {
-                unit: {
-                    src: [
-                        'src/js/*.js'
-                    ],
-                    options: {
-                        specs: ['test/unit/**/*.unit.spec.js'],
-                        helpers: 'test/unit/helpers/*.helper.js',
-                        vendor: [
-                            'lib/jquery/dist/jquery.js',
-                            'node_modules/grunt-contrib-jasmine/vendor/jasmine-2.0.0/jasmine.js'
+            sync: {
+                alvChNg: {
+                    files: [{
+                        cwd: 'components/alv-ch-ng/dist',
+                        src: [
+                            '**'
                         ],
-                        version: '2.0.0',
-                        template: require('grunt-template-jasmine-istanbul'),
-                        templateOptions: {
-                            coverage: 'build/coverage/coverage.json',
-                            report: [
-                                {
-                                    type: 'html',
-                                    options: {
-                                        dir: 'build/coverage/reports/html'
-                                    }
-                                },
-                                {
-                                    type: 'lcov',
-                                    options: {
-                                        dir: 'build/coverage/reports/lcov'
-                                    }
-                                },
-                                {
-                                    type: 'text-summary'
-                                }
-                            ]
-                        }
-                    }
+                        dest: 'lib/alv-ch-ng'
+                    }],
+                    verbose: true
+                },
+                bootstrapUI: {
+                    files: [{
+                        cwd: 'components/angular-ui-bootstrap/src',
+                        src: [
+                            '**'
+                        ],
+                        dest: 'lib/angular-ui-bootstrap'
+                    }],
+                    verbose: true
+                },
+                bootstrap: {
+                    files: [{
+                        cwd: 'components/bootstrap/dist',
+                        src: [
+                            '**'
+                        ],
+                        dest: 'lib/bootstrap'
+                    }],
+                    verbose: true
+                },
+                bootstrapSelect: {
+                    files: [{
+                        cwd: 'components/bootstrap-select/dist',
+                        src: [
+                            '**'
+                        ],
+                        dest: 'lib/bootstrap-select'
+                    }],
+                    verbose: true
+                },
+                jQuery: {
+                    files: [{
+                        cwd: 'components/jquery/dist',
+                        src: [
+                            '**'
+                        ],
+                        dest: 'lib/jquery'
+                    }],
+                    verbose: true
+                },
+                jQueryProperty: {
+                    files: [{
+                        cwd: 'components/jquery-i18n-property',
+                        src: [
+                            '*.js'
+                        ],
+                        dest: 'lib/jquery'
+                    }],
+                    verbose: true
+                },
+                jQueryStellar: {
+                    files: [{
+                        cwd: 'components/jquery.stellar/src',
+                        src: [
+                            '*.js'
+                        ],
+                        dest: 'lib/jquery'
+                    }],
+                    verbose: true
+                },
+                jQueryUI: {
+                    files: [{
+                        cwd: 'components/jquery-ui',
+                        src: [
+                            '**'
+                        ],
+                        dest: 'lib/jquery-ui'
+                    }],
+                    verbose: true
+                },
+                ng: {
+                    files: [{
+                        cwd: 'components/angular',
+                        src: [
+                            '*.js', '*.gzip', '*.map', '*.css'
+                        ],
+                        dest: 'lib/angular'
+                    }],
+                    verbose: true
+                },
+                ngRoute: {
+                    files: [{
+                        cwd: 'components/angular-route',
+                        src: [
+                            '*.js', '*.map'
+                        ],
+                        dest: 'lib/angular'
+                    }],
+                    verbose: true
+                },
+                ngPlaceholders: {
+                    files: [{
+                        cwd: 'components/ng-placeholders/dist',
+                        src: [
+                            '**'
+                        ],
+                        dest: 'lib/ng-placeholders'
+                    }],
+                    verbose: true
+                },
+                ngSanitize: {
+                    files: [{
+                        cwd: 'components/angular-sanitize',
+                        src: [
+                            '*.js', '*.map'
+                        ],
+                        dest: 'lib/angular'
+                    }],
+                    verbose: true
+                },
+                ngCookies: {
+                    files: [{
+                        cwd: 'components/angular-cookies',
+                        src: [
+                            '*.js', '*.map'
+                        ],
+                        dest: 'lib/angular'
+                    }],
+                    verbose: true
+                },
+                ngScroll: {
+                    files: [{
+                        cwd: 'components/angular-scroll',
+                        src: [
+                            '*.js', '*.map'
+                        ],
+                        dest: 'lib/angular'
+                    }],
+                    verbose: true
+                },
+                ngMocks: {
+                    files: [{
+                        cwd: 'components/angular-mocks',
+                        src: [
+                            '*.js'
+                        ],
+                        dest: 'lib/angular-mocks'
+                    }],
+                    verbose: true
+                },
+                ngUiBootstrapSrc: {
+                    files: [{
+                        cwd: 'components/angular-ui-bootstrap/src',
+                        src: [
+                            '**'
+                        ],
+                        dest: 'lib/angular-ui-bootstrap'
+                    }],
+                    verbose: true
+                },
+                ngUiBootstrapTemplate: {
+                    files: [{
+                        cwd: 'components/angular-ui-bootstrap/template',
+                        src: [
+                            '**'
+                        ],
+                        dest: 'public/template'
+                    }],
+                    verbose: true
+                },
+                nyaBootstrapSelect: {
+                    files: [{
+                        cwd: 'components/nya-bootstrap-select/src',
+                        src: [
+                            '**'
+                        ],
+                        dest: 'lib/nya-bootstrap-select'
+                    }],
+                    verbose: true
+                },
+                moment: {
+                    files: [{
+                        cwd: 'components/moment/min',
+                        src: [
+                            '**'
+                        ],
+                        dest: 'lib/moment'
+                    }],
+                    verbose: true
+                },
+                blueimpCanvas: {
+                    files: [{
+                        cwd: 'components/blueimp-canvas-to-blob/js',
+                        src: [
+                            '**'
+                        ],
+                        dest: 'lib/blueimp'
+                    }],
+                    verbose: true
+                },
+                blueimpFileUpload: {
+                    files: [{
+                        cwd: 'components/blueimp-file-upload',
+                        src: [
+                            '**'
+                        ],
+                        dest: 'lib/blueimp'
+                    }],
+                    verbose: true
+                },
+                blueimpLoadImage: {
+                    files: [{
+                        cwd: 'components/blueimp-load-image/js',
+                        src: [
+                            '**'
+                        ],
+                        dest: 'lib/blueimp'
+                    }],
+                    verbose: true
+                },
+                blueimpTmpl: {
+                    files: [{
+                        cwd: 'components/blueimp-tmpl/js',
+                        src: [
+                            '**'
+                        ],
+                        dest: 'lib/blueimp'
+                    }],
+                    verbose: true
+                },
+                requirejs: {
+                    files: [{
+                        cwd: 'components/requirejs',
+                        src: [
+                            'require.js'
+                        ],
+                        dest: 'lib/requirejs'
+                    }],
+                    verbose: true
+                },
+                webfonts: {
+                    files: [{
+                        cwd: 'components/components-webfontloader',
+                        src: [
+                            'webfont.js'
+                        ],
+                        dest: 'lib/components-webfontloader'
+                    }],
+                    verbose: true
                 }
             },
             coveralls: {
@@ -131,88 +312,42 @@
                 }
             },
             protractor: {
-                options: {
-                    keepAlive: false // If false, the grunt process stops when the test fails.
-                },
-                int: {
-                    configFile: 'test/integration/conf/protractor.conf.js' // Target-specific config file
-                }
-            },
-            // release mgmt
-            push: {
-                options: {
-                    files: ['package.json'],
-                    updateConfigs: [],
-                    releaseBranch: 'master',
-                    add: true,
-                    addFiles: ['*.*', 'dist/**', 'src/**', 'test/**'], // '.' for all files except ignored files in .gitignore
-                    commit: true,
-                    commitMessage: 'Release v%VERSION%',
-                    commitFiles: ['*.*', 'dist/**', 'src/**', 'test/**'], // '-a' for all files
-                    createTag: true,
-                    tagName: 'v%VERSION%',
-                    tagMessage: 'Version %VERSION%',
-                    push: false,
-                    npm: false,
-                    gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d' // options to use with '$ git describe'
-                }
-            },
-            // linting
-            jshint: {
-                gruntfile: {
-                    options: {
-                        jshintrc: '.jshintrc'
-                    },
-                    src: 'Gruntfile.js'
-                },
-                src: {
-                    options: {
-                        jshintrc: '.jshintrc'
-                    },
-                    src: ['src/**/*.js']
-                },
-                test: {
-                    options: {
-                        jshintrc: 'test/.jshintrc'
-                    },
-                    src: ['test/**/*.js', '!test/dev/*.js', '!test/**/helpers/*.helper.js']
+                e2e: {
+                    options : {
+                        configFile: '../sysinfos-api/src/test/js/integration/conf/protractor.conf.js',
+                        keepAlive: false
+                    }
                 }
             }
+
         });
 
-        // These plugins provide necessary tasks.
-        grunt.loadNpmTasks('grunt-contrib-clean');
-        grunt.loadNpmTasks('grunt-contrib-compress');
-        grunt.loadNpmTasks('grunt-contrib-concat');
-        grunt.loadNpmTasks('grunt-contrib-copy');
-        grunt.loadNpmTasks('grunt-contrib-cssmin');
-        grunt.loadNpmTasks('grunt-contrib-jasmine');
-        grunt.loadNpmTasks('grunt-contrib-jshint');
-        grunt.loadNpmTasks('grunt-contrib-uglify');
-        grunt.loadNpmTasks('grunt-contrib-watch');
-        grunt.loadNpmTasks('grunt-push-release');
-        grunt.loadNpmTasks('grunt-contrib-less');
-        grunt.loadNpmTasks('grunt-protractor-runner');
-        grunt.loadNpmTasks('grunt-karma');
-        grunt.loadNpmTasks('grunt-exec');
-        grunt.loadNpmTasks('grunt-contrib-connect');
-        grunt.loadNpmTasks('grunt-protractor-webdriver');
-        grunt.loadNpmTasks('grunt-coveralls');
 
         // Tests
         grunt.registerTask('unit-test', ['jasmine']);
-        grunt.registerTask('int-test', ['protractor_webdriver:start', 'protractor']);
+        // required modules
+        grunt.loadNpmTasks('grunt-contrib-clean');
+        grunt.loadNpmTasks('grunt-contrib-jshint');
+        grunt.loadNpmTasks('grunt-contrib-copy');
+        grunt.loadNpmTasks('grunt-contrib-jasmine');
+        grunt.loadNpmTasks('grunt-sync');
+        grunt.loadNpmTasks('grunt-coveralls');
+        grunt.loadNpmTasks('grunt-protractor-runner');
+        grunt.loadNpmTasks('grunt-protractor-webdriver');
+
+        // Tests
+        grunt.registerTask('e2e', ['protractor_webdriver:start', 'protractor']);
+        grunt.registerTask('lint', ['jshint']);
+
+        // Dependencies
+        grunt.registerTask('deps', ['clean', 'sync']);
 
         // CI
-        grunt.registerTask('travis', ['jshint', 'clean:build', 'unit-test', 'coveralls']);
+        grunt.registerTask('travis', ['clean', 'sync', 'jasmine', 'coveralls']);
 
-        // Releases
-        grunt.registerTask('releasePatch', ['jshint', 'clean:all', 'uglify', 'copy', 'push:patch']);
-        grunt.registerTask('releaseMinor', ['jshint', 'clean:all', 'uglify', 'copy', 'less', 'push:minor']);
-        grunt.registerTask('releaseMajor', ['jshint', 'clean:all', 'uglify', 'copy', 'less', 'push:major']);
 
         // Default task.
-        grunt.registerTask('default', ['jshint', 'clean:all', 'unit-test', 'copy', 'cssmin', 'uglify', 'compress']);
+        grunt.registerTask('default', ['sync']);
     };
 
 

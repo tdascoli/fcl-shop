@@ -22,6 +22,11 @@
     "angular":"latest",
     "angular-cookies":"latest",
     "angular-route":"latest",
-    "alv-ch-ng":"latest"
+    "alv-ch-ng":"latest",
+    "moment":"latest"
+  },
+  "resolutions": {
+    "jquery": "~2.1.1",
+    "angular": "~1.3.0"
   }
 }

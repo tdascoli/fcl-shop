@@ -1,6 +1,6 @@
 lib/**/*
 node_modules/**/*
+components/**/*
 build/**/*
 .idea/**/*
 .idea/*
-demo/fonts/*

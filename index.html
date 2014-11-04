@@ -1,21 +1,35 @@
 <!DOCTYPE html>
-<html ng-app="ng-shop" ng-controller="MainCtrl">
+<html ng-app="ng-shop" ng-controller="ArticlesCtrl">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 
-    <title>fcl-shop</title>
+    <title>FC Länggasse 1910 - Offizieller Shop</title>
+
+    <script type="text/javascript">
+        WebFontConfig = {
+            google: { families: [ 'Source+Sans+Pro:400,400italic,600italic,600:latin' ] }
+        };
+        (function() {
+            var wf = document.createElement('script');
+            wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+                    '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+            wf.type = 'text/javascript';
+            wf.async = 'true';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(wf, s);
+        })(); </script>
 
     <!--/.alv-ch-ng.bootstrap -->
-    <link rel="stylesheet" type="text/css" href="/lib/alv-ch-ng/dist/css/alv-ch-bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="lib/alv-ch-ng/css/alv-ch-bootstrap.min.css"/>
 
     <!--/.css - essentials -->
-    <link rel="stylesheet" type="text/css" href="/lib/bootstrap-select/dist/css/bootstrap-select.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/lib/blueimp-file-upload/css/jquery.fileupload.css"/>
-    <link rel="stylesheet" type="text/css" href="/lib/blueimp-file-upload/css/jquery.fileupload-ui.css"/>
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap-select/css/bootstrap-select.min.css"/>
+    <link rel="stylesheet" type="text/css" href="lib/blueimp/css/jquery.fileupload.css"/>
+    <link rel="stylesheet" type="text/css" href="lib/blueimp/css/jquery.fileupload-ui.css"/>
 
     <!--/.css - fcl shop -->
-    <link rel="stylesheet" type="text/css" href="/css/fcl.css"/>
+    <link rel="stylesheet" type="text/css" href="css/fcl.css"/>
 
 </head>
 <body ng-controller="CartCtrl">
@@ -30,7 +44,7 @@
                 <span class="icon-bar"></span>
             </button>
             <div class="navbar-brand alv">
-                <a href="/">fcl shop</a>
+                <a href="/">FCL Shop</a>
             </div>
         </div>
         <div class="collapse navbar-collapse" id="global-navigation">
@@ -84,49 +98,49 @@
 <!--/.footer -->
 
 <!--/.core -->
-<script type="text/javascript" src="/lib/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="/lib/angular/angular.min.js"></script>
-<script type="text/javascript" src="/lib/angular-route/angular-route.min.js"></script>
-<script type="text/javascript" src="/lib/angular-cookies/angular-cookies.min.js"></script>
-<script type="text/javascript" src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/lib/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
-<script type="text/javascript" src="/lib/nya-bootstrap-select/src/nya-bootstrap-select.js"></script>
-<script type="text/javascript" src="/lib/jquery-i18n-property/jquery.i18n.properties.js"></script>
+<script type="text/javascript" src="/lib/angular/angular-route.min.js"></script>
+<script type="text/javascript" src="/lib/angular/angular-cookies.min.js"></script>
+<script type="text/javascript" src="/lib/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/lib/bootstrap-select/js/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="/lib/nya-bootstrap-select/nya-bootstrap-select.js"></script>
+<script type="text/javascript" src="/lib/jquery/jquery.i18n.properties.js"></script>
 
-<script type="text/javascript" src="/lib/angular-ui-bootstrap/src/typeahead/typeahead.js"></script>
-<script type="text/javascript" src="/lib/angular-ui-bootstrap/src/tooltip/tooltip.js"></script>
-<script type="text/javascript" src="/lib/angular-ui-bootstrap/src/position/position.js"></script>
-<script type="text/javascript" src="/lib/angular-ui-bootstrap/src/bindHtml/bindHtml.js"></script>
+<script type="text/javascript" src="/lib/angular-ui-bootstrap/typeahead/typeahead.js"></script>
+<script type="text/javascript" src="/lib/angular-ui-bootstrap/tooltip/tooltip.js"></script>
+<script type="text/javascript" src="/lib/angular-ui-bootstrap/position/position.js"></script>
+<script type="text/javascript" src="/lib/angular-ui-bootstrap/bindHtml/bindHtml.js"></script>
 
 <script type="text/javascript" src="/js/accounting.min.js"></script>
+<script type="text/javascript" src="/lib/moment/moment-with-locales.min.js"></script>
 
 <!--/.File Upload -->
-<script type="text/javascript" src="/lib/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
-<script type="text/javascript" src="/lib/blueimp-load-image/js/load-image.min.js"></script>
-<script type="text/javascript" src="/lib/blueimp-file-upload/js/jquery.fileupload.js"></script>
-<script type="text/javascript" src="/lib/blueimp-file-upload/js/jquery.fileupload-process.js"></script>
-<script type="text/javascript" src="/lib/blueimp-file-upload/js/jquery.fileupload-image.js"></script>
-<script type="text/javascript" src="/lib/blueimp-file-upload/js/jquery.fileupload-validate.js"></script>
-<script type="text/javascript" src="/lib/blueimp-file-upload/js/jquery.fileupload-angular.js"></script>
+<script type="text/javascript" src="/lib/blueimp/js/vendor/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="/lib/blueimp/load-image.all.min.js"></script>
+<script type="text/javascript" src="/lib/blueimp/js/jquery.fileupload.js"></script>
+<script type="text/javascript" src="/lib/blueimp/js/jquery.fileupload-process.js"></script>
+<script type="text/javascript" src="/lib/blueimp/js/jquery.fileupload-image.js"></script>
+<script type="text/javascript" src="/lib/blueimp/js/jquery.fileupload-validate.js"></script>
+<script type="text/javascript" src="/lib/blueimp/js/jquery.fileupload-angular.js"></script>
 
 <!--/.app-modules -->
-<script type="text/javascript" src="/lib/alv-ch-ng/dist/alv-ch-ng.i18n.js"></script>
-<script type="text/javascript" src="/lib/alv-ch-ng/dist/alv-ch-ng.security.js"></script>
-<script type="text/javascript" src="/lib/alv-ch-ng/dist/alv-ch-ng.common.min.js"></script>
-<script type="text/javascript" src="/lib/alv-ch-ng/dist/alv-ch-ng.ui-core.js"></script>
-<script type="text/javascript" src="/lib/alv-ch-ng/dist/alv-ch-ng.ui-forms.min.js"></script>
-<script type="text/javascript" src="/lib/alv-ch-ng/dist/alv-ch-ng.ui-navigation.min.js"></script>
+<script type="text/javascript" src="/lib/alv-ch-ng/alv-ch-ng.i18n.js"></script>
+<script type="text/javascript" src="/lib/alv-ch-ng/alv-ch-ng.security.js"></script>
+<script type="text/javascript" src="/lib/alv-ch-ng/alv-ch-ng.common.min.js"></script>
+<script type="text/javascript" src="/lib/alv-ch-ng/alv-ch-ng.ui-core.min.js"></script>
+<script type="text/javascript" src="/lib/alv-ch-ng/alv-ch-ng.ui-forms.min.js"></script>
+<script type="text/javascript" src="/lib/alv-ch-ng/alv-ch-ng.ui-navigation.min.js"></script>
 
-<script type="text/javascript" src="/app/config.js"></script>
-<script type="text/javascript" src="/app/app.js"></script>
-<script type="text/javascript" src="/app/routing.js"></script>
-<script type="text/javascript" src="/app/ctrl/MainCtrl.js"></script>
-<script type="text/javascript" src="/app/ctrl/ArticlesCtrl.js"></script>
-<script type="text/javascript" src="/app/ctrl/OrdersCtrl.js"></script>
-<script type="text/javascript" src="/app/ctrl/CartCtrl.js"></script>
-<script type="text/javascript" src="/app/service/ArticlesService.js"></script>
-<script type="text/javascript" src="/app/service/OrdersService.js"></script>
-<script type="text/javascript" src="/app/service/CartService.js"></script>
+<script type="text/javascript" src="/js/app/config.js"></script>
+<script type="text/javascript" src="/js/app/app.js"></script>
+<script type="text/javascript" src="/js/app/routing.js"></script>
+<script type="text/javascript" src="/js/app/ctrl/ArticlesCtrl.js"></script>
+<script type="text/javascript" src="/js/app/ctrl/OrdersCtrl.js"></script>
+<script type="text/javascript" src="/js/app/ctrl/CartCtrl.js"></script>
+<script type="text/javascript" src="/js/app/service/ArticlesService.js"></script>
+<script type="text/javascript" src="/js/app/service/OrdersService.js"></script>
+<script type="text/javascript" src="/js/app/service/CartService.js"></script>
 
 </body>
 </html>

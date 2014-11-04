@@ -18,7 +18,7 @@
             else {
                 $scope.order={};
             }
-       }
+        }
 
        if ($routeParams.orderId){
            $scope.savedOrder=true;
@@ -62,6 +62,14 @@
            return OrdersService.getOrder();
        };
 
+
+        $scope.getOrderDate=function(){
+            console.log($scope.getOrder().order_date);
+            var date = moment($scope.getOrder().order_date,'YYYY-MM-DD HH:mm:ss');
+            return date;
+        };
+
+
         $scope.getOrderArticle=function(){
             return OrdersService.getOrderArticle();
         };
@@ -70,5 +78,11 @@
            return OrdersService.getOrderId();
        };
 
+    });
+
+    as.filter("asDate", function () {
+        return function (input) {
+            return new Date(input);
+        }
     });
 }());
