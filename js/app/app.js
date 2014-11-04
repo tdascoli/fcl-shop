@@ -1,7 +1,7 @@
 'use strict';
 
 (function(){
-    var as = angular.module($appConfig.app.name, ['ngRoute', 'ngCookies', 'alv-ch-ng.i18n', 'alv-ch-ng.ui-forms', 'alv-ch-ng.ui-navigation', 'alv-ch-ng.ui-core', 'alv-ch-ng.security', 'blueimp.fileupload']);
+    var as = angular.module($appConfig.app.name, ['ngRoute', 'ngCookies', 'alv-ch-ng.i18n', 'alv-ch-ng.ui-forms', 'alv-ch-ng.ui-navigation', 'alv-ch-ng.ui-core', 'alv-ch-ng.security', 'blueimp.fileupload','ngTextTruncate']);
 
     as.config(function($routeProvider,$httpProvider){
        $httpProvider.defaults.headers.useXDomain=true;

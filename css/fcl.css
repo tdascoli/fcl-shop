@@ -86,14 +86,7 @@ button.wide {
     margin-left: 30px;
 }
 
-/* TODO Delete with new alv-ch-ng version */
-.close.btn {
-    transition: none;
-    -webkit-transform:none;
-    -ms-transform:none;
-    transform:none;
-
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
+.article .description {
+    display: block;
+    min-height: 70px;
 }

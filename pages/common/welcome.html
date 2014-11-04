@@ -9,7 +9,11 @@
             <div>
                 <img ng-src="{{article.picture}}" class="small center-block" />
                 <h4>{{article.title}}</h4>
-                {{article.description}}<hr />
+                <span class="description" ng-text-truncate="article.description"
+                        ng-tt-chars-threshold="100"
+                        ng-tt-more-label="Mehr"
+                        ng-tt-less-label="Weniger"></span>
+                <hr />
                 <div ng-show="showDetail">
                     <div class="row">
                         <div class="col-md-6">
