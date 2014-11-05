@@ -21,7 +21,8 @@
             var prize = +article.prize;
             //console.log("init "+prize);
             if (article.discount>0){
-                prize = prize-((article.discount/100) * prize);
+                //(35.8 / 100) * 10000;
+                prize = ((100-article.discount)/100) * prize;
             }
             //console.log("discount "+article.discount+"% "+prize);
             if (article.logo_print==='1'){
@@ -34,7 +35,7 @@
         $scope.showStaticChildrenPrize=function(article,currency){
             var childrenPrize = +article.children_prize;
             if (article.discount>0){
-                childrenPrize = childrenPrize*(article.discount/100);
+                childrenPrize = ((100-article.discount)/100) * childrenPrize;
             }
             if (article.logo_print>0){
                 childrenPrize=childrenPrize+8;
