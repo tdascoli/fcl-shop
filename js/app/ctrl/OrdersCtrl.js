@@ -62,6 +62,10 @@
            return OrdersService.getOrder();
        };
 
+        $scope.showTotalOrderPrize=function(){
+            return OrdersService.getOrder().totalPrize;
+        };
+
 
         $scope.getOrderDate=function(){
             return moment($scope.getOrder().order_date,'YYYY-MM-DD HH:mm:ss').format('DD.MM.YYYY HH:mm');

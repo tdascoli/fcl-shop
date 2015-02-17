@@ -51,7 +51,7 @@
             }
             // Stulpen
             else if (article.size_type==='3'){
-                return {value:'Junior / S',group:'Herren'};
+                return {value:'Senior / L',group:'Herren'};
             }
         };
 

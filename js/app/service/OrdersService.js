@@ -33,6 +33,7 @@
                 success(function (data, status) {
                     service.orderData = data;
                     service.getOrderArticleData(order_id);
+                    service.totalPrize(order_id);
                 }).
                 error(function (data, status) {
                     console.log(data);
@@ -60,6 +61,7 @@
                         service.putOrderArticle(service.prepareOrderArticle(service.orderData.order_id,cart[i]));
                     }
                     service.sendOrder(service.orderData.order_id);
+                    service.totalPrize(service.orderData.order_id);
                 }).
                 error(function (data, status) {
                     console.log(data);
@@ -108,8 +110,27 @@
             return service.orderData.order_id;
         };
 
-        service.showTotalOrderPrize=function(){
-            return "Prize";
+        service.getArticles=function(order_id){
+            $http.get(orderArticleUrl+"/"+order_id).
+                success(function (data, status) {
+                    return data;
+                }).
+                error(function (data, status) {
+                    console.log(data);
+                    console.log(status);
+                    return false;
+                });
+        };
+
+        service.totalPrize=function(order_id){
+            $http.get(orderArticleUrl+"/"+order_id).
+                success(function (data, status) {
+                    var prize = 0;
+                    angular.forEach(data, function(article){
+                        prize=prize+accounting.unformat(article.order_prize);
+                    });
+                    service.orderData.totalPrize=accounting.toFixed(prize,2);
+                });
         };
 
         return service;

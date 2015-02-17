@@ -241,7 +241,10 @@ function sendOrders($id) {
           </tbody>
           </table>
           <p />
-          ((Sobald die Bestellung bla bla bla...))
+          <ul>
+            <li>Sobald die Ware abholbereit ist, bekommen Sie <strong>von Vaucher</strong> eine Nachricht</li>
+            <li>Die Ware muss in der <strong>Vaucher Filiale in Niederwangen</strong> abgeholt und auch bezahlt werden</li>
+          </ul>
         </body>
         </html>';
 
