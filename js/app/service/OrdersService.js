@@ -57,11 +57,13 @@
             $http.post(orderUrl, order).
                 success(function (data, status) {
                     service.orderData = data;
+                    var prize=0;
                     for (var i=0;i<cart.length;i++){
                         service.putOrderArticle(service.prepareOrderArticle(service.orderData.order_id,cart[i]));
+                        prize=prize+accounting.unformat(cart[i].order_prize);
                     }
                     service.sendOrder(service.orderData.order_id);
-                    service.totalPrize(service.orderData.order_id);
+                    service.setTotalPrize(prize);
                 }).
                 error(function (data, status) {
                     console.log(data);
@@ -131,6 +133,10 @@
                     });
                     service.orderData.totalPrize=accounting.toFixed(prize,2);
                 });
+        };
+
+        service.setTotalPrize=function(prize){
+            service.orderData.totalPrize=accounting.toFixed(prize,2);
         };
 
         return service;

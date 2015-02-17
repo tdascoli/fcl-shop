@@ -218,7 +218,13 @@ function sendOrders($id) {
           <p>Dieses E-Mail wurde automatisch generiert. Bitte beantworten Sie es nicht.</p>
           <hr />
           Vielen Dank f&uuml;r Ihre Bestellung im FCL-Shop by Vaucher Sports.<p />
-          Ihre Bestell-Nummer lautet: '.$id.'<p />
+          <a href="http://shop.fclaenggasse.ch/#/order/'.$id.'">Ihre Bestell-Nummer lautet: <strong>'.$id.'</strong></a><p />
+          <ul>
+            <li>Sobald die Ware abholbereit ist, bekommen Sie <strong>von Vaucher</strong> eine Nachricht</li>
+            <li>Die Ware muss in der <strong>Vaucher Filiale in Niederwangen</strong> abgeholt und auch bezahlt werden</li>
+            <li><a href="http://shop.fclaenggasse.ch/#/agb">Weitere Information auf der Webseite</a></li>
+          </ul>
+          <p />
           <strong>'.$orders[0]->name.'</strong><br />
           '.$orders[0]->address.'<br />
           '.$orders[0]->phone.'<br />
@@ -240,11 +246,6 @@ function sendOrders($id) {
           '.$bestellung.'
           </tbody>
           </table>
-          <p />
-          <ul>
-            <li>Sobald die Ware abholbereit ist, bekommen Sie <strong>von Vaucher</strong> eine Nachricht</li>
-            <li>Die Ware muss in der <strong>Vaucher Filiale in Niederwangen</strong> abgeholt und auch bezahlt werden</li>
-          </ul>
         </body>
         </html>';
 
