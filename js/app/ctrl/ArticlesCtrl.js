@@ -40,21 +40,58 @@
             $scope.articlesData = ArticlesService.data;
         }
 
+        $scope.getInitArticleSize=function(article){
+            if (article.size_type==='1') {
+                // size_type===1 default Herren & Kinder
+                return {value:'Herren / S',group:'Herren'};
+            }
+            // nur Erwachsenen Grösse
+            else if (article.size_type==='2'){
+                return {value:'Herren / S',group:'Herren'};
+            }
+            // Stulpen
+            else if (article.size_type==='3'){
+                return {value:'Junior / S',group:'Herren'};
+            }
+        };
+
         $scope.getArticleSize=function(article){
 
             if (article.size_type==='1') {
                 // size_type===1 default Herren & Kinder
-                return $scope.size;
+                return [{group:"Herren", size:[
+                            {value:'Herren / S',group:'Herren'},
+                            {value:'Herren / M',group:'Herren'},
+                            {value:'Herren / L',group:'Herren'},
+                            {value:'Herren / XL',group:'Herren'},
+                            {value:'Herren / XXL',group:'Herren'}
+                        ]},
+                        {group:"Kinder", size:[
+                            {value:'Kinder / XS',group:'Kinder'},
+                            {value:'Kinder / S',group:'Kinder'},
+                            {value:'Kinder / M',group:'Kinder'},
+                            {value:'Kinder / L',group:'Kinder'},
+                            {value:'Kinder / XL',group:'Kinder'}
+                        ]}];
             }
             // nur Erwachsenen Grösse
             else if (article.size_type==='2'){
-                return $scope.menSize;
+                return [{group:"Herren", size:[
+                    {value:'Herren / S',group:'Herren'},
+                    {value:'Herren / M',group:'Herren'},
+                    {value:'Herren / L',group:'Herren'},
+                    {value:'Herren / XL',group:'Herren'},
+                    {value:'Herren / XXL',group:'Herren'}
+                ]}];
             }
             // Stulpen
             else if (article.size_type==='3'){
-                return $scope.stulpenSize;
+                return [{group:"Stulpen",size:[
+                    {value:'Senior / L',group:'Herren'},
+                    {value:'Junior / S',group:'Herren'}
+                ]}];
             }
-        }
+        };
 
         $scope.size=[
             {value:'Herren / S',group:'Herren'},
@@ -78,8 +115,8 @@
         ];
 
         $scope.stulpenSize=[
-            {value:'Senior / L'},
-            {value:'Junior / S'}
+            {value:'Senior / L',group:'Herren'},
+            {value:'Junior / S',group:'Kinder'}
         ];
 
         var success = function (data, status) {

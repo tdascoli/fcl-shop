@@ -14,26 +14,30 @@
   "scripts": {
     "test": "grunt travis --verbose"
   },
-  "dependencies": {},
-    "devDependencies": {
-        "bower": "*",
-        "chromedriver": "^2.10.0-1",
-        "colors": "*",
-        "express": "^4.9.0",
-        "grunt": "*",
-        "grunt-cli": "^0.1.13",
-        "grunt-contrib-clean": "*",
-        "grunt-contrib-copy": "*",
-        "grunt-contrib-jasmine": "^0.7.0",
-        "grunt-template-jasmine-istanbul": "0.3.1",
-        "grunt-contrib-jshint": "*",
-        "grunt-contrib-watch": "*",
-        "grunt-protractor-runner": "^1.1.4",
-        "grunt-protractor-webdriver": "^0.1.8",
-        "grunt-coveralls": "*",
-        "grunt-sync": "*",
-        "jshint": "*",
-        "protractor": "^1.1.1",
-        "travis": "*"
-    }
+  "dependencies": {
+    "grunt-contrib-clean": "*",
+    "grunt-contrib-compress": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-connect": "*",
+    "grunt-contrib-copy": "*",
+    "grunt-contrib-cssmin": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-cssbeautifier":"*",
+    "grunt-exec": "*",
+    "grunt-htmlhint":"*"
+  },
+  "devDependencies": {
+    "angular": "latest",
+    "angular-route": "latest",
+    "grunt": "*",
+    "load-grunt-tasks": "*",
+    "time-grunt": "*",
+    "bower": "*",
+    "colors": "*",
+    "express": "^4.9.0",
+    "karma": "*",
+    "phantomjs": "*",
+    "selenium": "*"
+  }
 }

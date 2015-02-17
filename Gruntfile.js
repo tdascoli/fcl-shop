@@ -1,7 +1,11 @@
 ;(function () {
-    "use strict";
+    'use strict';
 
     module.exports = function (grunt) {
+        require('load-grunt-tasks')(grunt, {
+            pattern: ['grunt-*', '!grunt-template-jasmine-istanbul']
+        });
+        require('time-grunt')(grunt);
 
         // Project configuration.
         grunt.initConfig({
@@ -9,13 +13,89 @@
             // Metadata.
             pkg: grunt.file.readJSON("package.json"),
             banner: '/* ' +
-                '<%= pkg.title || pkg.name %> - <%= pkg.version %> - ' +
-                '<%= grunt.template.today("yyyy-mm-dd") %> - ' +
-                'Copyright (c) <%= grunt.template.today("yyyy") %> tdascoli; */\n',
+            '<%= pkg.title || pkg.name %> - <%= pkg.version %> - ' +
+            '<%= grunt.template.today("yyyy-mm-dd") %> - ' +
+            'Copyright (c) <%= grunt.template.today("yyyy") %> tdascoli; */\n',
+
             // Task configurations.
             clean: {
-                libs: ['public/lib'],
-                templates: ['public/template']
+                lib: ['lib']
+            },
+            copy: {
+                public: {
+                    files: [
+                        {
+                            expand: true,
+                            cwd: 'components/alv-ch-ng/dist/',
+                            src: ['**/*'],
+                            dest: 'lib/alv-ch-ng/'
+                        },
+                        {
+                            expand: true,
+                            cwd: 'components/bootstrap/',
+                            src: 'fonts/*',
+                            dest: 'lib/alv-ch-ng/'
+                        },
+                        {
+                            expand: true,
+                            cwd: 'components/bootstrap-select/dist/',
+                            src: '**/*',
+                            dest: 'lib/'
+                        },
+                        {
+                            expand: true,
+                            cwd: 'components/blueimp-load-image/',
+                            src: '**/*.all.min.js',
+                            dest: 'lib/blueimp/'
+                        },
+                        {
+                            expand: true,
+                            cwd: 'components/blueimp-file-upload/',
+                            src: '**/*',
+                            dest: 'lib/blueimp/'
+                        }
+                    ]
+                }
+            },
+            uglify: {
+                options: {
+                    banner: '<%= banner %>'
+                },
+                demo: {
+                    options: {
+                        'mangle': false
+                    },
+                    files: {
+                        'lib/lib.min.js': [
+                            'components/jquery/dist/jquery.js',
+                            'components/jquery-i18n-property/jquery.i18n.properties.js',
+                            'components/bootstrap/dist/js/bootstrap.js',
+                            'components/bootstrap-select/dist/js/bootstrap-select.js',
+                            'components/bootstrap-datepicker/js/bootstrap-datepicker.js',
+                            'components/bootstrapaccessibilityplugin/plugins/js/bootstrap-accessibility.js',
+                            'components/angular/angular.js',
+                            'components/angular-resource/angular-resource.js',
+                            'components/angular-aria/angular-aria.js',
+                            'components/ng-lodash/build/ng-lodash.js',
+                            'components/autofill-event/src/autofill-event.js',
+                            'components/angular-cookies/angular-cookies.js',
+                            'components/angular-route/angular-route.js',
+                            'components/angular-sanitize/angular-sanitize.js',
+                            'components/angular-scroll/angular-scroll.js',
+                            'components/angular-ui-bootstrap/src/bindHtml/bindHtml.js',
+                            'components/angular-ui-bootstrap/src/position/position.js',
+                            'components/angular-ui-bootstrap/src/tabs/tabs.js',
+                            'components/angular-ui-bootstrap/src/tooltip/tooltip.js',
+                            'components/angular-ui-bootstrap/src/typeahead/typeahead.js',
+                            'components/angular-ui-bootstrap/src/modal/modal.js',
+                            'components/angular-ui-bootstrap/src/transition/transition.js',
+                            'js/accounting.min.js',
+                            'js/ng-text-truncate.js',
+                            'components/moment/moment.js',
+                            'components/mailcheck/src/mailcheck.js'
+                        ]
+                    }
+                }
             },
             jshint: {
                 gruntfile: {
@@ -28,326 +108,40 @@
                     options: {
                         jshintrc: '.jshintrc'
                     },
-                    src: ['public/**/*.js']
-                },
-                test: {
+                    src: ['public/scripts/**/*.js']
+                }
+            },
+            less: {
+                src: {
                     options: {
-                        jshintrc: 'test/.jshintrc'
+                        paths: ['public/less/'],
+                        compress: false,
+                        cleancss: true,
+                        ieCompat: true
                     },
-                    src: ['test/**/*.js', '!test/dev/*.js', '!test/**/helpers/*.helper.js']
+                    files: {
+                        'public/styles/mtg-app.css': ['public/less/mtg-app.less']
+                    }
                 }
             },
-            sync: {
-                alvChNg: {
-                    files: [{
-                        cwd: 'components/alv-ch-ng/dist',
-                        src: [
-                            '**'
-                        ],
-                        dest: 'lib/alv-ch-ng'
-                    }],
-                    verbose: true
-                },
-                bootstrapUI: {
-                    files: [{
-                        cwd: 'components/angular-ui-bootstrap/src',
-                        src: [
-                            '**'
-                        ],
-                        dest: 'lib/angular-ui-bootstrap'
-                    }],
-                    verbose: true
-                },
-                bootstrap: {
-                    files: [{
-                        cwd: 'components/bootstrap/dist',
-                        src: [
-                            '**'
-                        ],
-                        dest: 'lib/bootstrap'
-                    }],
-                    verbose: true
-                },
-                bootstrapSelect: {
-                    files: [{
-                        cwd: 'components/bootstrap-select/dist',
-                        src: [
-                            '**'
-                        ],
-                        dest: 'lib/bootstrap-select'
-                    }],
-                    verbose: true
-                },
-                jQuery: {
-                    files: [{
-                        cwd: 'components/jquery/dist',
-                        src: [
-                            '**'
-                        ],
-                        dest: 'lib/jquery'
-                    }],
-                    verbose: true
-                },
-                jQueryProperty: {
-                    files: [{
-                        cwd: 'components/jquery-i18n-property',
-                        src: [
-                            '*.js'
-                        ],
-                        dest: 'lib/jquery'
-                    }],
-                    verbose: true
-                },
-                jQueryStellar: {
-                    files: [{
-                        cwd: 'components/jquery.stellar/src',
-                        src: [
-                            '*.js'
-                        ],
-                        dest: 'lib/jquery'
-                    }],
-                    verbose: true
-                },
-                jQueryUI: {
-                    files: [{
-                        cwd: 'components/jquery-ui',
-                        src: [
-                            '**'
-                        ],
-                        dest: 'lib/jquery-ui'
-                    }],
-                    verbose: true
-                },
-                ng: {
-                    files: [{
-                        cwd: 'components/angular',
-                        src: [
-                            '*.js', '*.gzip', '*.map', '*.css'
-                        ],
-                        dest: 'lib/angular'
-                    }],
-                    verbose: true
-                },
-                ngRoute: {
-                    files: [{
-                        cwd: 'components/angular-route',
-                        src: [
-                            '*.js', '*.map'
-                        ],
-                        dest: 'lib/angular'
-                    }],
-                    verbose: true
-                },
-                ngPlaceholders: {
-                    files: [{
-                        cwd: 'components/ng-placeholders/dist',
-                        src: [
-                            '**'
-                        ],
-                        dest: 'lib/ng-placeholders'
-                    }],
-                    verbose: true
-                },
-                ngSanitize: {
-                    files: [{
-                        cwd: 'components/angular-sanitize',
-                        src: [
-                            '*.js', '*.map'
-                        ],
-                        dest: 'lib/angular'
-                    }],
-                    verbose: true
-                },
-                ngCookies: {
-                    files: [{
-                        cwd: 'components/angular-cookies',
-                        src: [
-                            '*.js', '*.map'
-                        ],
-                        dest: 'lib/angular'
-                    }],
-                    verbose: true
-                },
-                ngScroll: {
-                    files: [{
-                        cwd: 'components/angular-scroll',
-                        src: [
-                            '*.js', '*.map'
-                        ],
-                        dest: 'lib/angular'
-                    }],
-                    verbose: true
-                },
-                ngMocks: {
-                    files: [{
-                        cwd: 'components/angular-mocks',
-                        src: [
-                            '*.js'
-                        ],
-                        dest: 'lib/angular-mocks'
-                    }],
-                    verbose: true
-                },
-                ngUiBootstrapSrc: {
-                    files: [{
-                        cwd: 'components/angular-ui-bootstrap/src',
-                        src: [
-                            '**'
-                        ],
-                        dest: 'lib/angular-ui-bootstrap'
-                    }],
-                    verbose: true
-                },
-                ngUiBootstrapTemplate: {
-                    files: [{
-                        cwd: 'components/angular-ui-bootstrap/template',
-                        src: [
-                            '**'
-                        ],
-                        dest: 'public/template'
-                    }],
-                    verbose: true
-                },
-                nyaBootstrapSelect: {
-                    files: [{
-                        cwd: 'components/nya-bootstrap-select/src',
-                        src: [
-                            '**'
-                        ],
-                        dest: 'lib/nya-bootstrap-select'
-                    }],
-                    verbose: true
-                },
-                moment: {
-                    files: [{
-                        cwd: 'components/moment/min',
-                        src: [
-                            '**'
-                        ],
-                        dest: 'lib/moment'
-                    }],
-                    verbose: true
-                },
-                blueimpCanvas: {
-                    files: [{
-                        cwd: 'components/blueimp-canvas-to-blob/js',
-                        src: [
-                            '**'
-                        ],
-                        dest: 'lib/blueimp'
-                    }],
-                    verbose: true
-                },
-                blueimpFileUpload: {
-                    files: [{
-                        cwd: 'components/blueimp-file-upload',
-                        src: [
-                            '**'
-                        ],
-                        dest: 'lib/blueimp'
-                    }],
-                    verbose: true
-                },
-                blueimpLoadImage: {
-                    files: [{
-                        cwd: 'components/blueimp-load-image/js',
-                        src: [
-                            '**'
-                        ],
-                        dest: 'lib/blueimp'
-                    }],
-                    verbose: true
-                },
-                blueimpTmpl: {
-                    files: [{
-                        cwd: 'components/blueimp-tmpl/js',
-                        src: [
-                            '**'
-                        ],
-                        dest: 'lib/blueimp'
-                    }],
-                    verbose: true
-                },
-                requirejs: {
-                    files: [{
-                        cwd: 'components/requirejs',
-                        src: [
-                            'require.js'
-                        ],
-                        dest: 'lib/requirejs'
-                    }],
-                    verbose: true
-                },
-                webfonts: {
-                    files: [{
-                        cwd: 'components/components-webfontloader',
-                        src: [
-                            'webfont.js'
-                        ],
-                        dest: 'lib/components-webfontloader'
-                    }],
-                    verbose: true
-                }
-            },
-            coveralls: {
+            htmlhint: {
                 options: {
-                    // LCOV coverage file relevant to every target
-                    src: '',
-
-                    // When true, grunt-coveralls will only print a warning rather than
-                    // an error, to prevent CI builds from failing unnecessarily (e.g. if
-                    // coveralls.io is down). Optional, defaults to false.
-                    force: false
+                    htmlhintrc: '.htmlhintrc'
                 },
-                all: {
-                    src: 'build/coverage/reports/lcov/lcov.info'
-                }
-            },
-            // integration testing with protractor
-            protractor_webdriver: {
-                start: {
-                    options: {
-                        command: 'webdriver-manager start'
-                    }
-                }
-            },
-            protractor: {
-                e2e: {
-                    options : {
-                        configFile: '../sysinfos-api/src/test/js/integration/conf/protractor.conf.js',
-                        keepAlive: false
-                    }
+                src: {
+                    src: ['pages/**/*.html']
                 }
             }
-
         });
-
 
         // Tests
         grunt.registerTask('unit-test', ['jasmine']);
-        // required modules
-        grunt.loadNpmTasks('grunt-contrib-clean');
-        grunt.loadNpmTasks('grunt-contrib-jshint');
-        grunt.loadNpmTasks('grunt-contrib-copy');
-        grunt.loadNpmTasks('grunt-contrib-jasmine');
-        grunt.loadNpmTasks('grunt-sync');
-        grunt.loadNpmTasks('grunt-coveralls');
-        grunt.loadNpmTasks('grunt-protractor-runner');
-        grunt.loadNpmTasks('grunt-protractor-webdriver');
-
-        // Tests
-        grunt.registerTask('e2e', ['protractor_webdriver:start', 'protractor']);
-        grunt.registerTask('lint', ['jshint']);
-
-        // Dependencies
-        grunt.registerTask('deps', ['clean', 'sync']);
-
-        // CI
-        grunt.registerTask('travis', ['clean', 'sync', 'jasmine', 'coveralls']);
-
-
+        grunt.registerTask('jshint-test', ['jshint']);
+        grunt.registerTask('htmlhint-test', ['htmlhint']);
+        // build
+        grunt.registerTask('build', ['clean','copy','uglify']);
         // Default task.
-        grunt.registerTask('default', ['sync']);
+        grunt.registerTask('default', ['build']);
     };
 
 

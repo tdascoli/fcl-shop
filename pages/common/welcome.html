@@ -1,4 +1,3 @@
-<message message-severity="danger">DAS IST EINE TESTVERSION - ES WERDEN KEINE BESTELLUNGEN REGISTRIERT</message>
 <h1>FC Länggasse <small>Web Shop</small></h1>
 
 <div class="articles row" ng-repeat="article in articlesData" ng-if="$index % 3 == 0">
@@ -17,7 +16,8 @@
                 <div ng-show="showDetail">
                     <div class="row">
                         <div class="col-md-6">
-                            <select form-label="articleSize" form-select nya-selectpicker ng-model="article.size" ng-options="c.value group by c.group for c in getArticleSize(article)" class="medium" id="size{{article.article_id}}" ng-init="article.size=size[0]"></select>
+                            <!--<select form-label="articleSize" form-input ng-model="article.size" ng-options="c.value group by c.group for c in getArticleSize(article)" id="size{{article.article_id}}" ng-init="article.size=size[0]"></select>-->
+                            <selectpicker required id="size{{article.article_id}}" form-label="articleSize" options="getArticleSize(article)" options-text="value" options-group="size" options-group-text="group" options-init="getInitArticleSize(article)" ng-model="article.size"></selectpicker>
                         </div>
                         <div class="col-md-6">
                             <input form-label="articleQuantity" maxlength="2" form-input type="number" id="qty{{article.article_id}}" class="medium" placeholder="Anzahl" tooltip="Anzahl Artikel" ng-init="article.qty=1" ng-model="article.qty" />

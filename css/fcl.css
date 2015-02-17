@@ -90,3 +90,9 @@ button.wide {
     display: block;
     min-height: 75px;
 }
+.form-overflow {
+    z-index: 2000;
+}
+.selectpicker.btn-group .dropdown-menu {
+    max-height: none;
+}
