@@ -2,6 +2,10 @@ html, body {
     font-family: 'Source Sans Pro', sans-serif;
 }
 
+.navbar-inverse {
+    background-color: #013299;
+}
+
 #alv-divider {
     border-color: #f4d400;
 }
