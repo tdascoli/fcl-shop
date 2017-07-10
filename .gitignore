@@ -1,6 +1,5 @@
-lib/**/*
-node_modules/**/*
-components/**/*
-build/**/*
-.idea/**/*
-.idea/*
+/node_modules
+/dist
+/.tmp
+/.sass-cache
+/bower_components

@@ -1,46 +1,37 @@
 {
-  "name": "fcl-shop",
-  "version": "0.0.1",
-  "ignore": [
-    ".idea",
-    "demo",
-    "lib",
-    "node_modules",
-    "src",
-    "test",
-    ".bowerrc",
-    ".gitignore",
-    ".jshintignore",
-    ".jshintrc",
-    "ng-shop.iml",
-    "bower.json",
-    "Gruntfile.js",
-    "package.json",
-    "README.md"
-  ],
+  "name": "shop",
+  "version": "0.0.0",
   "dependencies": {
-    "angular": "latest",
-    "angular-route": "latest",
-    "angular-cookies": "latest",
-    "angular-sanitize": "latest",
-    "bootstrap": "v3.3.1",
-    "bootstrap-select": "v1.6.3",
-    "bootstrapaccessibilityplugin":"v1.0.4",
-    "jquery": "2.1.1",
-    "jquery-i18n-property": "https://github.com/alv-ch/jquery-i18n-properties.git",
-    "angular-tour": "0.1.1",
-    "angular-scroll": "0.6.4",
-    "underscore": "~1.4.4",
-    "angular-ui-bootstrap": "0.12.0",
-    "mailcheck":"1.1.0",
-    "bootstrap-datepicker":"1.3.1",
-    "ng-lodash":"latest",
-    "alv-ch-ng":"0.1.8.1",
-    "moment":"latest",
-    "blueimp-file-upload":"latest"
+    "angular": "^1.4.0",
+    "bootstrap-sass-official": "^3.2.0",
+    "angular-animate": "^1.4.0",
+    "angular-aria": "^1.4.0",
+    "angular-cookies": "^1.4.0",
+    "angular-messages": "^1.4.0",
+    "angular-resource": "^1.4.0",
+    "angular-route": "^1.4.0",
+    "angular-sanitize": "^1.4.0",
+    "angular-touch": "^1.4.0",
+    "angular-ui-router": "latest",
+    "accounting": "latest",
+    "ng-lodash": "latest",
+    "moment": "latest"
+  },
+  "devDependencies": {
+    "angular-mocks": "^1.4.0"
+  },
+  "appPath": "app",
+  "moduleName": "shopApp",
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "less/bootstrap.less",
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    }
   },
   "resolutions": {
-    "jquery": "~2.1.1",
-    "angular": "~1.3.0"
+    "angular": "^1.4.0"
   }
 }

@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Language" content="de-ch">
+    <title>Biohof Sch&uuml;pfenried</title>
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+  </head>
+  <body class="bgblau bg" ng-app="shopApp">
+
+    <div class="container">
+
+      <div class="content">
+        <div class="content__logo">
+          <a href="/"><img src="http://www.schuepfenried.ch/hof/upload/logo/logo-biohof650.png" alt="Biohof Schüpfenried" title="Biohof Schüpfenried" name="LogoBIOHOF" width="650" height="160" border="0" /></a>
+        </div>
+
+        <div>
+          <div class="content__navigation" ui-view="cart"></div>
+          <div class="content__content" ui-view="content"></div>
+        </div>
+      </div>
+
+      <div class="pictures-stripes">
+        <div class="pictures-stripes__content">
+          <div id="adressbereich">
+            <p class="adresse">Biohof Sch&uuml;pfenried<br />
+              3043 Uettligen<br />
+              031 829 04 02<br />
+              031 829 00 02 (Fax)<br />
+              <span class="musik email">info [at] schuepfenried.ch</span></p>
+            <p class="adresse top20">Hofladen<br />
+              031 829 04 20<br />
+              <span class="musik email">hofladen [at] schuepfenried.ch</span></p>
+            <p class="adresse top20">Hofgastronomie<br />
+              031 829 31 65<br />
+              <span class="musik email">hofgastronomie [at] schuepfenried.ch</span></p>
+            <a href="http://www.bio-suisse.ch" target="_blank"><img
+              src="images/bio-suisse.png" alt="BioSuisse" width="110" height="81" hspace="0" vspace="10" border="0"
+              title="BioSuisse"></a>
+            <a href="http://www.demeter.ch" target="_blank"><img
+              src="images/demeter.png" alt="Demeter" width="110" height="57" hspace="10" vspace="10" border="0"
+              title="Demeter"></a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap-sass-official/assets/javascripts/bootstrap.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/accounting/accounting.js"></script>
+    <script src="bower_components/ng-lodash/build/ng-lodash.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+
+    <script src="scripts/cart/cart.controller.js"></script>
+    <script src="scripts/cart/cart.service.js"></script>
+    <script src="scripts/cart/article.service.js"></script>
+    <!-- endbuild -->
+</body>
+</html>
