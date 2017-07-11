@@ -32,12 +32,12 @@ var app = angular.module('shopApp', [
       url: '/home',
       views: {
         cart: {
-          templateUrl: 'views/cart.html',
+          templateUrl: 'views/main/cart.html',
           controller: 'CartCtrl'
         },
         content: {
-          templateUrl: 'views/main.html',
-          controller: 'CartCtrl'
+          templateUrl: 'views/main/main.html',
+          controller: 'ArticleCtrl'
         }
       }
     })
@@ -45,8 +45,17 @@ var app = angular.module('shopApp', [
       url: '/checkout',
       views: {
         content: {
-          templateUrl: 'views/checkout.html',
+          templateUrl: 'views/checkout/checkout.html',
           controller: 'CartCtrl'
+        }
+      }
+    })
+    .state('order', {
+      url: '/order',
+      views: {
+        content: {
+          templateUrl: 'views/order/order.html',
+          controller: 'OrderCtrl'
         }
       }
     });

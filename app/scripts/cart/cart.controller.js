@@ -3,16 +3,10 @@
   'use strict';
 
   angular.module('shopApp')
-    .controller('CartCtrl', function ($scope, lodash, ArticleService, CartService) {
+    .controller('CartCtrl', function ($scope, lodash, CartService, OrderService) {
 
       $scope.cart=CartService.cart;
-      $scope.articles=false;
-
-      ArticleService.listArticles().then(function (result){
-        $scope.articles=result.data.articles;
-      },function (error){
-        console.error(error);
-      });
+      $scope.order=OrderService.order;
 
       $scope.accounting = function(prize){
         return accounting.formatMoney(prize, { symbol: "Fr.",  format: "%v %s" }, 2, "'", ".");

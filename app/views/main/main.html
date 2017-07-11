@@ -1,0 +1,14 @@
+<p>
+  Text
+</p>
+
+<ul class="article">
+  <li class="article__item" ng-repeat="article in articles">
+    <button class="btn btn-default btn-article" ng-click="addToCart(article)">in den Warenkorb <span class="glyphicon glyphicon-shopping-cart"></span></button>
+
+    <h2>{{article.title}}</h2>
+
+    <strong>{{accounting(article.prize)}}</strong>
+    <p>{{article.description}}</p>
+  </li>
+</ul>

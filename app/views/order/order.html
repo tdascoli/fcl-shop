@@ -1,0 +1,52 @@
+<h1>Bestellung #{{order.order_id}}</h1>
+
+<p class="alert alert-info">Bitte beachten: Das Fleisch muss abgeholt werden, Rechnung wird beigelegt.</p>
+<table class="table table-hover table-condensed">
+  <thead>
+    <tr>
+      <th>Produkt</th>
+      <th>Menge</th>
+      <th class="text--right">Preis</th>
+      <th class="text--right">Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="article in cart track by $index">
+      <td>{{article.title}}</td>
+      <td>
+        <div class="form-group cart__item--qty">
+          <label for="qty-{{article.article_id}}" class="sr-only">Menge</label>
+          <input type="number" min="1" ng-model="article.qty" class="form-control" id="qty-{{article.article_id}}" placeholder="Menge" />
+        </div>
+      </td>
+      <td align="right">{{accounting(article.prize)}}</td>
+      <td align="right">{{showCartPrize(article.prize,article.qty)}}</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th colspan="3">Total</th>
+      <th class="text--right">{{showTotalCartPrize()}}</th>
+    </tr>
+  </tfoot>
+</table>
+
+<h2>Bestellinformation</h2>
+
+<div class="form-group">
+  <label for="name">Vorname / Name</label>
+  <input type="text" class="form-control" id="name" ng-model="order.name" />
+</div>
+<div class="form-group">
+  <label for="adresse">Adresse</label>
+  <textarea id="adresse" ng-model="order.address" class="form-control" rows="3"></textarea>
+</div>
+<div class="form-group">
+  <label for="email">E-Mail</label>
+  <input type="email" class="form-control" id="email" ng-model="order.email" />
+</div>
+<div class="form-group">
+  <label for="phone">Telefon</label>
+  <input type="text" class="form-control" id="phone" ng-model="order.phone" />
+</div>
+<button class="btn btn-primary">Bestellen</button>
