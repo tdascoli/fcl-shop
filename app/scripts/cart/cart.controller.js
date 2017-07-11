@@ -34,6 +34,11 @@
         return $scope.accounting(total);
       };
 
+      $scope.order=function(){
+        var item = {"article_id":"10","title":"Haxen","description":"Kilopreis: 20.00 SFr.","prize":"6"};
+        OrderService.placeOrder(item);
+      };
+
     });
 
 
