@@ -4,7 +4,24 @@
 
 <div  ng-if="cart.length>0">
   <ul class="cart">
-    <li class="cart__item" ng-repeat="article in cart">{{article.qty}} x {{article.title}}</li>
+    <li class="cart__item" ng-repeat="article in cart">
+
+      <strong class="cart__item--title">{{article.title}}</strong>
+      <span class="cart__item--prize">{{showCartPrize(article.prize,article.qty)}}</span>
+
+      <div class="form-group cart__item--qty">
+        <label for="qty-{{article.article_id}}" class="sr-only">Anzahl</label>
+        <input type="number" min="1" ng-model="article.qty" class="form-control" id="qty-{{article.article_id}}" placeholder="Anzahl" />
+      </div>
+
+      <div>
+        <button  ng-click="removeFromCart(article)" class="btn btn-default cart__item--remove"><span class="glyphicon glyphicon-trash"></span></button>
+      </div>
+    </li>
+    <li class="cart__item">
+      <strong class="cart__item--total">Total</strong>
+      <span class="cart__item--prize cart__item--total">{{showTotalCartPrize()}}</span>
+    </li>
   </ul>
 
   <p><a ui-sref="checkout">zur Kasse gehen</a></p>

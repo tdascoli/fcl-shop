@@ -3,7 +3,7 @@
   'use strict';
 
   angular.module('shopApp')
-    .controller('CartCtrl', function ($scope, ArticleService, CartService) {
+    .controller('CartCtrl', function ($scope, lodash, ArticleService, CartService) {
 
       $scope.cart=CartService.cart;
       $scope.articles=false;
@@ -20,6 +20,24 @@
 
       $scope.addToCart=function(article){
         CartService.toCart(article);
+      };
+
+      $scope.removeFromCart=function(article){
+        lodash.remove($scope.cart, function(n) {
+          return n.article_id === article.article_id;
+        });
+      };
+
+      $scope.showCartPrize=function(prize,qty){
+        return $scope.accounting(qty * prize);
+      };
+
+      $scope.showTotalCartPrize=function(){
+        var total=0;
+        $scope.cart.forEach(function(item){
+          total = total + (item.qty * item.prize);
+        });
+        return $scope.accounting(total);
       };
 
     });

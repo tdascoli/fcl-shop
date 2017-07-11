@@ -15,6 +15,7 @@
         var order_article = {
           article_id:item.article_id,
           title:item.title,
+          prize:item.prize,
           qty:1
         };
 

@@ -89,6 +89,29 @@ html {
   }
 }
 
+.cart__item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.cart__item--title {
+  width: 75%;
+}
+.cart__item--prize {
+  width: 25%;
+  text-align: right;
+}
+
+.cart__item--total {
+  width: 50%;
+}
+
+.cart__item--qty {
+  width: 60px;
+  float: left;
+}
+
 // biohof.css
 .adresse {
   font-size: 11pt;
