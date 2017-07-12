@@ -11,13 +11,10 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="article in cart track by $index">
+    <tr ng-repeat="article in order.cart track by $index">
       <td>{{article.title}}</td>
       <td>
-        <div class="form-group cart__item--qty">
-          <label for="qty-{{article.article_id}}" class="sr-only">Menge</label>
-          <input type="number" min="1" ng-model="article.qty" class="form-control" id="qty-{{article.article_id}}" placeholder="Menge" />
-        </div>
+        {{article.qty}}
       </td>
       <td align="right">{{accounting(article.prize)}}</td>
       <td align="right">{{showCartPrize(article.prize,article.qty)}}</td>
@@ -34,19 +31,18 @@
 <h2>Bestellinformation</h2>
 
 <div class="form-group">
-  <label for="name">Vorname / Name</label>
-  <input type="text" class="form-control" id="name" ng-model="order.name" />
+  <label>Vorname / Name</label>
+  <div>{{order.name}}</div>
 </div>
 <div class="form-group">
-  <label for="adresse">Adresse</label>
-  <textarea id="adresse" ng-model="order.address" class="form-control" rows="3"></textarea>
+  <label>Adresse</label>
+  <div ng-bind-html="order.address | nl2br">{{}}</div>
 </div>
 <div class="form-group">
-  <label for="email">E-Mail</label>
-  <input type="email" class="form-control" id="email" ng-model="order.email" />
+  <label>E-Mail</label>
+  <div>{{order.email}}</div>
 </div>
 <div class="form-group">
-  <label for="phone">Telefon</label>
-  <input type="text" class="form-control" id="phone" ng-model="order.phone" />
+  <label>Telefon</label>
+  <div>{{order.phone}}</div>
 </div>
-<button class="btn btn-primary">Bestellen</button>

@@ -11,7 +11,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="article in cart track by $index">
+    <tr ng-repeat="article in order.cart track by $index">
       <td>{{article.title}}</td>
       <td>
         <div class="form-group cart__item--qty">
@@ -50,4 +50,4 @@
   <label for="phone">Telefon</label>
   <input type="text" class="form-control" id="phone" ng-model="order.phone" />
 </div>
-<button class="btn btn-primary" ng-click="order()">Bestellen</button>
+<button class="btn btn-primary" ng-click="placeOrder()">Bestellen</button>

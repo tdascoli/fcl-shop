@@ -3,10 +3,9 @@
   'use strict';
 
   angular.module('shopApp')
-    .controller('CartCtrl', function ($scope, lodash, CartService, OrderService) {
+    .controller('CartCtrl', function ($scope, $state, lodash, CartService) {
 
-      $scope.cart=CartService.cart;
-      $scope.order=OrderService.order;
+      $scope.order=CartService.order;
 
       $scope.accounting = function(prize){
         return accounting.formatMoney(prize, { symbol: "Fr.",  format: "%v %s" }, 2, "'", ".");
@@ -17,7 +16,7 @@
       };
 
       $scope.removeFromCart=function(article){
-        lodash.remove($scope.cart, function(n) {
+        lodash.remove($scope.order.cart, function(n) {
           return n.article_id === article.article_id;
         });
       };
@@ -28,15 +27,20 @@
 
       $scope.showTotalCartPrize=function(){
         var total=0;
-        $scope.cart.forEach(function(item){
+        $scope.order.cart.forEach(function(item){
           total = total + (item.qty * item.prize);
         });
         return $scope.accounting(total);
       };
 
-      $scope.order=function(){
-        var item = {"article_id":"10","title":"Haxen","description":"Kilopreis: 20.00 SFr.","prize":"6"};
-        OrderService.placeOrder(item);
+      $scope.placeOrder=function(){
+        CartService.placeOrder().then(function (result){
+          CartService.emptyCart();
+
+          $state.go('order',{orderId: result.data});
+        },function (error){
+          console.error(error);
+        });
       };
 
     });

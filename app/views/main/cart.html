@@ -1,10 +1,10 @@
 <span class="menulink">Warenkorb</span>
 
-<div class="alert alert-info" ng-if="cart.length===0">Sie haben noch nichts in den Warenkorb gelegt.</div>
+<div class="alert alert-info" ng-if="order.cart.length===0">Sie haben noch nichts in den Warenkorb gelegt.</div>
 
-<div  ng-if="cart.length>0">
+<div  ng-if="order.cart.length>0">
   <ul class="cart">
-    <li class="cart__item" ng-repeat="article in cart">
+    <li class="cart__item" ng-repeat="article in order.cart">
 
       <strong class="cart__item--title">{{article.title}}</strong>
       <span class="cart__item--prize">{{showCartPrize(article.prize,article.qty)}}</span>

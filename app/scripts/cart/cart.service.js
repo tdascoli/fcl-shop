@@ -3,12 +3,18 @@
   'use strict';
 
   angular.module('shopApp')
-    .factory('CartService', function (lodash) {
+    .factory('CartService', function ($http, lodash) {
 
-      var cart=[];
+      var order={
+        name:'',
+        address:'',
+        email:'',
+        phone:'',
+        cart:[]
+      };
 
       function isItemInCart(item){
-        return lodash.findIndex(cart,['article_id', item.article_id]);
+        return lodash.findIndex(order.cart,['article_id', item.article_id]);
       }
 
       function toCart(item){
@@ -22,16 +28,27 @@
         var itemIndex=isItemInCart(item);
 
         if (itemIndex===-1){
-          cart.push(order_article);
+          order.cart.push(order_article);
         }
         else {
-          cart[itemIndex].qty++;
+          order.cart[itemIndex].qty++;
         }
       }
 
+      function placeOrder(){
+        return $http.post('http://localhost:3010/orders', order);
+      }
+
+      function emptyCart(){
+        order.cart = [];
+      }
+
       return {
-        cart: cart,
-        toCart: toCart
+        order: order,
+        cart: order.cart,
+        toCart: toCart,
+        placeOrder: placeOrder,
+        emptyCart: emptyCart
       };
 
     });

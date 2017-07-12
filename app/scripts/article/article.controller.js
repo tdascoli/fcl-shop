@@ -17,7 +17,6 @@
         return accounting.formatMoney(prize, { symbol: "Fr.",  format: "%v %s" }, 2, "'", ".");
       };
 
-
       $scope.addToCart=function(article){
         CartService.toCart(article);
       };

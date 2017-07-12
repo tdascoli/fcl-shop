@@ -1,0 +1,16 @@
+<fieldset>
+  <legend>Anmelden</legend>
+
+  <div class="alert alert-danger" ng-if="error">Ihre Anmeldedaten sind ungültig.</div>
+
+  <div class="form-group">
+    <label for="user">Benutzer</label>
+    <input type="text" class="form-control" id="user" placeholder="Benutzer" ng-model="credentials.user" />
+  </div>
+  <div class="form-group">
+    <label for="password">Passwort</label>
+    <input type="password" class="form-control" id="password" placeholder="Passwort" ng-model="credentials.password" />
+  </div>
+  <button type="submit" class="btn btn-primary" ng-click="login()">Anmelden</button>
+
+</fieldset>

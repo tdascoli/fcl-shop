@@ -46,42 +46,52 @@ $app->get('/orders/{id}', function (Request $request, Response $response) {
   $sth = $db->prepare("SELECT * FROM orders WHERE order_id=:id");
   $sth->bindParam("id", $id);
   $sth->execute();
-  $articles = $sth->fetchObject();
-  return $response->withJson($articles);
+  $order = $sth->fetchObject();
+  $order->cart=[];
+
+  // LOAD ORDER ARTICLES!!
+  $sth = $db->prepare("SELECT * FROM order_article WHERE order_id=:id");
+  $sth->bindParam("id", $id);
+  $sth->execute();
+  $order->cart = $sth->fetchAll();
+
+  return $response->withJson($order);
 });
 
 $app->post('/orders', function (Request $request, Response $response) {
   /*
-   * orders
-   * orders->cart[]
    * send email!
-   *
+   */
+
   $data = $request->getParsedBody();
 
-  $sql = "INSERT INTO articles (title, description, prize)  VALUES (:title, :description, :prize)";
-
   $db = getConnection();
+
+  // INSERT ORDER
+  $sql = "INSERT INTO orders (name, address, email, phone)  VALUES (:name, :address, :email, :phone)";
   $sth = $db->prepare($sql);
-  $sth->bindParam("title", $data['title']);
-  $sth->bindParam("description", $data['description']);
-  $sth->bindParam("prize", $data['prize']);
+  $sth->bindParam("name", $data['name']);
+  $sth->bindParam("address", $data['address']);
+  $sth->bindParam("email", $data['email']);
+  $sth->bindParam("phone", $data['phone']);
   $sth->execute();
 
-  $data->article_id = $db->lastInsertId();
-  return $response->withJson($data);
-  */
+  $order_id = $db->lastInsertId();
+
+  // INSERT ORDER_ARTICLE
+  foreach ($data['cart'] as $article){
+    $sql = "INSERT INTO order_article (order_id, article_id, title, prize, qty)  VALUES (:orderId, :articleId, :title, :prize, :qty)";
+    $sth = $db->prepare($sql);
+    $sth->bindParam("orderId", $order_id);
+    $sth->bindParam("articleId", $article['article_id']);
+    $sth->bindParam("title", $article['title']);
+    $sth->bindParam("prize", $article['prize']);
+    $sth->bindParam("qty", $article['qty']);
+    $sth->execute();
+  }
+
+  return $response->withJson($order_id);
 });
-
-/*
-$app->get('/articles/:id', 'getArticle');
-$app->get('/orders/:id',  'getOrder');
-
-$app->post('/orders/',    'addOrder');
-
-? $app->get('/order_article/:id',  'getOrderArticles');
-? $app->post('/order_article', 'addOrderArticles');
-? $app->get('/orders/send/:id', 'sendOrders');
-*/
 
 /** ADMIN-SECTION */
 /*
@@ -91,8 +101,45 @@ $app->delete('/articles/:id', 'deleteArticle');
 
 ?get->orders (all orders)?
  */
+$app->post('/authenticate', function (Request $request, Response $response) {
+  $data = $request->getParsedBody();
+
+  $sql = "SELECT admin_id FROM admins WHERE user = :user AND password = :password";
+
+  $db = getConnection();
+  $sth = $db->prepare($sql);
+  $sth->bindParam("user", $data['user']);
+  $sth->bindParam("password", $data['password']);
+  $sth->execute();
+  $adminId = $sth->fetchObject();
+
+  if (!$adminId){
+    return $response->withJson(false);
+  }
+  $token = md5($data['user'].$data['password']);
+
+  return $response->withJson(['token'=>$token,'uid'=>$adminId]);
+});
+
+$app->put('/articles/{id}', function (Request $request, Response $response) {
+  $id = $request->getAttribute('id');
+  $data = $request->getParsedBody();
+  $sql = "UPDATE articles SET title = :title, description = :description, prize = :prize WHERE article_id = :id";
+
+  $db = getConnection();
+  $sth = $db->prepare($sql);
+  $sth->bindParam("title", $data['title']);
+  $sth->bindParam("description", $data['description']);
+  $sth->bindParam("prize", $data['prize']);
+  $sth->bindParam("id", $id);
+  $sth->execute();
+
+  return $response->withJson($data);
+});
+
 $app->post('/articles', function (Request $request, Response $response) {
   $data = $request->getParsedBody();
+  $params = $request->getQueryParams();
 
   $sql = "INSERT INTO articles (title, description, prize)  VALUES (:title, :description, :prize)";
 
@@ -103,8 +150,21 @@ $app->post('/articles', function (Request $request, Response $response) {
   $sth->bindParam("prize", $data['prize']);
   $sth->execute();
 
-  $data->article_id = $db->lastInsertId();
+  $data['article_id'] = $db->lastInsertId();
   return $response->withJson($data);
+});
+
+$app->delete('/articles/{id}', function (Request $request, Response $response) {
+  $id = $request->getAttribute('id');
+
+  $sql = "DELETE FROM articles WHERE article_id = :id";
+
+  $db = getConnection();
+  $sth = $db->prepare($sql);
+  $sth->bindParam("id", $id);
+  $sth->execute();
+
+  return $response->withJson(true);
 });
 
 $app->run();
