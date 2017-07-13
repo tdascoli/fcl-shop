@@ -101,8 +101,8 @@ var app = angular.module('shopApp', [
       },
       resolve: {
         authenticate: function ($state, $cookies, AdminService) {
-          //if ($cookies.get('authenticate')!==undefined && AdminService.authenticate($cookies.get('authenticate'))) {
-          if (1===1){
+          if ($cookies.get('authenticate')!==undefined && AdminService.authenticate($cookies.get('authenticate'))) {
+          //if (1===1){
             return 'auth ok';
           }
           else {
@@ -124,8 +124,8 @@ var app = angular.module('shopApp', [
       },
       resolve: {
         authenticate: function ($state, $cookies, AdminService) {
-          //if ($cookies.get('authenticate')!==undefined && AdminService.authenticate($cookies.get('authenticate'))) {
-          if (1===1){
+          if ($cookies.get('authenticate')!==undefined && AdminService.authenticate($cookies.get('authenticate'))) {
+          //if (1===1){
             return 'auth ok';
           }
           else {
@@ -157,8 +157,8 @@ var app = angular.module('shopApp', [
       },
       resolve: {
         authenticate: function ($state, $cookies, AdminService) {
-          //if ($cookies.get('authenticate')!==undefined && AdminService.authenticate($cookies.get('authenticate'))) {
-          if (1===1){
+          if ($cookies.get('authenticate')!==undefined && AdminService.authenticate($cookies.get('authenticate'))) {
+          //if (1===1){
             return 'auth ok';
           }
           else {
@@ -184,8 +184,8 @@ var app = angular.module('shopApp', [
       },
       resolve: {
         authenticate: function ($state, $cookies, AdminService) {
-          //if ($cookies.get('authenticate')!==undefined && AdminService.authenticate($cookies.get('authenticate'))) {
-          if (1===1){
+          if ($cookies.get('authenticate')!==undefined && AdminService.authenticate($cookies.get('authenticate'))) {
+          //if (1===1){
             return 'auth ok';
           }
           else {

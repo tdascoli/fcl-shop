@@ -20,6 +20,101 @@ $app->add(function ($req, $res, $next) {
     ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
 });
 
+// FUNCTIONS
+function sendOrderEMail($data,$order_id){
+  $betreff = 'Ihre Bestellung im Beef-Shop Schüpfenried';
+  $bestellung='';
+  // Nachricht
+  $total_prize=0;
+  foreach ($data['cart'] as $article){
+    $bestellung .='<tr>
+                            <td>'.$article['title'].'</td>
+                            <td>'.$article['qty'].'</td>
+                            <td>'.$article['prize'].'</td>
+                            <td>'.($article['prize']*$article['qty']).'</td>
+                          </tr>';
+    $total_prize+=($article['prize']*$article['qty']);
+  }
+  // TOTAL
+  $bestellung .='<tr>
+                  <td colspan="3" align="right"><strong>Total</strong></td>
+                  <td>'.$total_prize.'</td>
+                </tr>';
+  $nachricht = '
+        <html>
+        <head>
+          <title>'.$betreff.'</title>
+          <style type="text/css">
+            table {
+                border-width: 1px;
+                border-spacing: 2px;
+                border-style: outset;
+                border-color: gray;
+                border-collapse: collapse;
+                background-color: white;
+            }
+            table th {
+                border-width: 2px;
+                padding: 5px;
+                border-style: solid;
+                border-color: gray;
+                background-color: white;
+                -moz-border-radius: ;
+            }
+            table td {
+                border-width: 2px;
+                padding: 5px;
+                border-style: solid;
+                border-color: gray;
+                background-color: white;
+                -moz-border-radius: ;
+            }
+            </style>
+        </head>
+        <body>
+          <p>Dieses E-Mail wurde automatisch generiert. Bitte beantworten Sie es nicht.</p>
+          <hr />
+          Vielen Dank f&uuml;r Ihre Bestellung im Beef-Shop Schüpfenried.<p />
+          <a href="http://www.schuepfenried.ch/shop/#/order/'.$order_id.'">Ihre Bestell-Nummer lautet: <strong>'.$order_id.'</strong></a><p />
+          <ul>
+            <li>Sobald die Ware abholbereit ist, bekommen Sie <strong>vom Bauernhof Schüpfenried</strong> eine Nachricht</li>
+            <li>Die Ware muss auf dem <strong>Bauernhof Schüpfenried</strong> abgeholt und auch bezahlt werden</li>
+            <li><a href="http://www.schuepfenried.ch/shop/">Weitere Information auf der Webseite</a></li>
+          </ul>
+          <p />
+          <strong>'.$data['name'].'</strong><br />
+          '.$data['address'].'<br />
+          '.$data['phone'].'<br />
+          '.$data['email'].'
+          <p />
+          <table>
+          <thead>
+            <tr>
+                <th>Artikel</th>
+                <th>Anzahl</th>
+                <th>Preis</th>
+                <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+          '.$bestellung.'
+          </tbody>
+          </table>
+        </body>
+        </html>';
+  $header  = 'MIME-Version: 1.0' . "\r\n";
+  $header .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+  // TO
+  $header .= 'To: Bauernhof Schüpfenried <thomas.dascoli@gmail.com>' . "\r\n";
+  // FROM
+  $header .= 'From: Bauernhof Schüpfenried <thomas.dascoli@gmail.com>' . "\r\n";
+  // Antwort Adresse
+  $header .= 'Reply-To: Bauernhof Schüpfenried <thomas.dascoli@gmail.com>' . "\r\n";
+  // verschicke die E-Mail
+  mail($data['email'], $betreff, $nachricht, $header);
+}
+
+// GENERAL
 $app->get('/articles', function (Request $request, Response $response) {
   $db = getConnection();
   $sth = $db->prepare("SELECT * FROM articles ORDER BY article_id");
@@ -59,10 +154,6 @@ $app->get('/orders/{id}', function (Request $request, Response $response) {
 });
 
 $app->post('/orders', function (Request $request, Response $response) {
-  /*
-   * send email!
-   */
-
   $data = $request->getParsedBody();
 
   $db = getConnection();
@@ -90,17 +181,12 @@ $app->post('/orders', function (Request $request, Response $response) {
     $sth->execute();
   }
 
+  sendOrderEMail($data,$order_id);
+
   return $response->withJson($order_id);
 });
 
 /** ADMIN-SECTION */
-/*
-$app->post('/articles', 'addArticle');
-$app->put('/articles/:id', 'updateArticle');
-$app->delete('/articles/:id', 'deleteArticle');
-
-?get->orders (all orders)?
- */
 $app->post('/authenticate', function (Request $request, Response $response) {
   $data = $request->getParsedBody();
 
@@ -180,6 +266,24 @@ $app->put('/orders/completed/{id}', function (Request $request, Response $respon
   $sth->execute();
 
   return $response->withJson($data);
+});
+
+$app->get('/orders', function (Request $request, Response $response) {
+  $db = getConnection();
+  $sth = $db->prepare("SELECT * FROM orders ORDER BY order_id");
+  $sth->execute();
+  $orders = $sth->fetchAll();
+
+  // LOAD ORDER ARTICLES!!
+
+  for($i=0;$i<count($orders);$i++){
+    $sth = $db->prepare("SELECT * FROM order_article WHERE order_id=:id");
+    $sth->bindParam("id", $orders[$i]['order_id']);
+    $sth->execute();
+    $orders[$i]['cart'] = $sth->fetchAll();
+  }
+
+  return $response->withJson($orders);
 });
 
 $app->delete('/orders/{id}', function (Request $request, Response $response) {
