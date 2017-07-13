@@ -83,7 +83,7 @@ var app = angular.module('shopApp', [
       url: '/admin',
       views: {
         content: {
-          templateUrl: 'views/admin/login.html',
+          templateUrl: 'views/admin/auth/login.html',
           controller: 'AuthCtrl'
         }
       }
@@ -92,12 +92,11 @@ var app = angular.module('shopApp', [
       url: '/admin/main',
       views: {
         cart: {
-          templateUrl: 'views/admin/articles.html',
-          controller: 'ArticleCtrl'
+          templateUrl: 'views/admin/navigation.html'
         },
         content: {
           templateUrl: 'views/admin/main.html',
-          controller: 'AdminCtrl'
+          controller: 'ArticleCtrl'
         }
       },
       resolve: {
@@ -109,9 +108,6 @@ var app = angular.module('shopApp', [
           else {
             $state.go('admin');
           }
-        },
-        article: function(){
-          return {};
         }
       }
     })
@@ -119,11 +115,10 @@ var app = angular.module('shopApp', [
       url: '/admin/edit/{articleId}',
       views: {
         cart: {
-          templateUrl: 'views/admin/articles.html',
-          controller: 'ArticleCtrl'
+          templateUrl: 'views/admin/navigation.html'
         },
         content: {
-          templateUrl: 'views/admin/main.html',
+          templateUrl: 'views/admin/articles/edit.html',
           controller: 'AdminCtrl'
         }
       },
@@ -145,6 +140,56 @@ var app = angular.module('shopApp', [
           }
           else {
             return {};
+          }
+        }
+      }
+    })
+    .state('admin/create', {
+      url: '/admin/create',
+      views: {
+        cart: {
+          templateUrl: 'views/admin/navigation.html'
+        },
+        content: {
+          templateUrl: 'views/admin/articles/edit.html',
+          controller: 'AdminCtrl'
+        }
+      },
+      resolve: {
+        authenticate: function ($state, $cookies, AdminService) {
+          //if ($cookies.get('authenticate')!==undefined && AdminService.authenticate($cookies.get('authenticate'))) {
+          if (1===1){
+            return 'auth ok';
+          }
+          else {
+            $state.go('admin');
+          }
+        },
+        article: function(){
+          return {};
+        }
+      }
+    })
+
+    .state('admin/orders', {
+      url: '/admin/orders',
+      views: {
+        cart: {
+          templateUrl: 'views/admin/navigation.html'
+        },
+        content: {
+          templateUrl: 'views/admin/orders/orders.html',
+          controller: 'AdminOrderCtrl'
+        }
+      },
+      resolve: {
+        authenticate: function ($state, $cookies, AdminService) {
+          //if ($cookies.get('authenticate')!==undefined && AdminService.authenticate($cookies.get('authenticate'))) {
+          if (1===1){
+            return 'auth ok';
+          }
+          else {
+            $state.go('admin');
           }
         }
       }

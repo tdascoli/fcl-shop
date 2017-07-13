@@ -1,0 +1,17 @@
+<h1>Bestellungen</h1>
+
+<ul class="article">
+  <li class="article__item" ng-repeat="order in orders">
+    <h2>Bestellung #{{order.order_id}} - {{toMoment(order.order_date)}}</h2>
+    <span class="label label-success" ng-if="order.confirmed==='1'">Bestätigt</span> <span class="label label-warning" ng-if="order.confirmed==='0'">Bestätigung offen</span> <span class="label label-info" ng-if="order.completed==='1'">Abgeschlossen</span>
+    <div>
+      <strong>{{order.name}} ({{order.email}} / {{order.phone}})</strong>
+      <ul class="order-article-list">
+        <li ng-repeat="article in order.cart">{{article.qty}}x {{article.title}}</li>
+      </ul>
+      <strong>Total {{showTotalCartPrize(order.cart)}}</strong>
+    </div>
+    <button class="btn btn-sm btn-primary" ng-click="completed(order.order_id)" ng-if="order.completed==='0'">Abgeschlossen <span class="glyphicon glyphicon-ok"></span></button>
+    <button class="btn btn-sm btn-danger" ng-click="delete(order.order_id)">Löschen <span class="glyphicon glyphicon-trash"></span></button>
+  </li>
+</ul>

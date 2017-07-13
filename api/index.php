@@ -167,6 +167,40 @@ $app->delete('/articles/{id}', function (Request $request, Response $response) {
   return $response->withJson(true);
 });
 
+$app->put('/orders/completed/{id}', function (Request $request, Response $response) {
+  $id = $request->getAttribute('id');
+  $data = $request->getParsedBody();
+
+  $sql = "UPDATE orders SET completed = :completed WHERE order_id = :id";
+
+  $db = getConnection();
+  $sth = $db->prepare($sql);
+  $sth->bindParam("completed", $data['completed']);
+  $sth->bindParam("id", $id);
+  $sth->execute();
+
+  return $response->withJson($data);
+});
+
+$app->delete('/orders/{id}', function (Request $request, Response $response) {
+  $id = $request->getAttribute('id');
+
+  $sql = "DELETE FROM orders WHERE order_id = :id";
+  $db = getConnection();
+  $sth = $db->prepare($sql);
+  $sth->bindParam("id", $id);
+  $sth->execute();
+
+  $sql = "DELETE FROM order_article WHERE order_id = :id";
+  $db = getConnection();
+  $sth = $db->prepare($sql);
+  $sth->bindParam("id", $id);
+  $sth->execute();
+
+  return $response->withJson(true);
+
+});
+
 $app->run();
 
 ?>

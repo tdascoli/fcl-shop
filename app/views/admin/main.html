@@ -1,19 +1,12 @@
 <h1>Artikel</h1>
 <div class="alert alert-info" ng-if="article.article_id===undefined">Bitte einen Artikel zum bearbeiten anklicken oder das Formular ausfüllen um einen neuen zu erstellen.</div>
 
-<div class="form-group">
-  <label for="title">Name des Artikels</label>
-  <input type="text" class="form-control" id="title" ng-model="article.title" />
-</div>
-<div class="form-group">
-  <label for="description">Beschreibung</label>
-  <textarea id="description" ng-model="article.description" class="form-control" rows="3"></textarea>
-</div>
-<div class="form-group article__item--prize">
-  <label for="prize">Preis</label>
-  <input type="text" class="form-control" id="prize" ng-model="article.prize" />
-</div>
+<ul class="article">
+  <li class="article__item" ng-repeat="article in articles">
+    <h2>{{article.title}}</h2>
+    <strong>{{accounting(article.prize)}}</strong>
+    <p>{{article.description}}</p>
 
-<button class="btn btn-primary" ng-click="save()">Speichern</button>
-<button class="btn btn-danger" ng-click="delete(article.article_id)" ng-if="article.article_id!==undefined">Löschen</button>
-<button class="btn" ui-sref="admin/main">Abbrechen</button>
+    <button class="btn btn-sm" ui-sref="admin/edit({articleId: article.article_id})">Bearbeiten <span class="glyphicon glyphicon-pencil"></span></button>
+  </li>
+</ul>

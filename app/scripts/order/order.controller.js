@@ -23,6 +23,10 @@
         return $scope.accounting(total);
       };
 
+      $scope.toMoment=function(date){
+        return moment(date).format("DD.MM.YYYY HH:mm");
+      };
+
     })
     .filter('nl2br', function() {
       var span = document.createElement('span');

@@ -13,6 +13,7 @@
   "globals": {
     "angular": false,
     "accounting": false,
-    "md5":false
+    "md5":false,
+    "moment":false
   }
 }

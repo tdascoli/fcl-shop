@@ -12,6 +12,9 @@
 
         return $q(function(resolve){
           $http.post('http://localhost:3010/authenticate',credentials).then(function (result){
+
+            console.log(result);
+
             if (!result.data){
               resolve(false);
             }
@@ -26,12 +29,17 @@
       }
 
       function authenticate(authToken){
-        return token['token']===authToken;
+        return token.token===authToken;
+      }
+
+      function addToken(){
+        return '?token='+token.token+'&uid='+token.uid.admin_id;
       }
 
       return {
         login: login,
-        authenticate: authenticate
+        authenticate: authenticate,
+        addToken: addToken
       };
 
     });
