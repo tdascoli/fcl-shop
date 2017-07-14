@@ -3,7 +3,7 @@
   'use strict';
 
   angular.module('shopApp')
-    .factory('CartService', function ($http, lodash) {
+    .factory('CartService', function ($http, lodash, baseUrl) {
 
       var order={
         name:'',
@@ -36,7 +36,7 @@
       }
 
       function placeOrder(){
-        return $http.post('http://localhost:3010/orders', order);
+        return $http.post(baseUrl+'/orders', order);
       }
 
       function emptyCart(){

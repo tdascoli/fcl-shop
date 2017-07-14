@@ -21,9 +21,6 @@ $app->add(function ($req, $res, $next) {
 });
 
 // FUNCTIONS
-function sendConfirmtionEMAil($data,$order_hash){
-  // todo
-}
 function sendOrderEMail($data,$order_id){
   $betreff = 'Ihre Bestellung im Beef-Shop Schüpfenried';
   $bestellung='';
@@ -158,7 +155,7 @@ $app->get('/orders/{id}', function (Request $request, Response $response) {
 
 $app->post('/orders', function (Request $request, Response $response) {
   $data = $request->getParsedBody();
-
+  $confirmed=true;
   $db = getConnection();
 
   // INSERT ORDER
@@ -168,6 +165,7 @@ $app->post('/orders', function (Request $request, Response $response) {
   $sth->bindParam("address", $data['address']);
   $sth->bindParam("email", $data['email']);
   $sth->bindParam("phone", $data['phone']);
+  $sth->bindParam("confirmed", $confirmed);
   $sth->execute();
 
   $order_id = $db->lastInsertId();

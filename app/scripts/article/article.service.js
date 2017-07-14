@@ -3,27 +3,27 @@
   'use strict';
 
   angular.module('shopApp')
-    .factory('ArticleService', function ($http) {
+    .factory('ArticleService', function ($http, baseUrl) {
 
       function listArticles(){
-        return $http.get('http://localhost:3010/articles');
+        return $http.get(baseUrl+'/articles');
       }
 
       function getArticle(articleId){
-        return $http.get('http://localhost:3010/articles/'+articleId);
+        return $http.get(baseUrl+'/articles/'+articleId);
       }
 
       function saveArticle(article){
         if (article.article_id!==undefined){
-          return $http.put('http://localhost:3010/articles/'+article.article_id, article);
+          return $http.put(baseUrl+'/articles/'+article.article_id, article);
         }
         else {
-          return $http.post('http://localhost:3010/articles', article);
+          return $http.post(baseUrl+'/articles', article);
         }
       }
 
       function deleteArticle(articleId){
-        return $http.delete('http://localhost:3010/articles/'+articleId);
+        return $http.delete(baseUrl+'/articles/'+articleId);
       }
 
       return {

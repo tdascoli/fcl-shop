@@ -3,7 +3,7 @@
   'use strict';
 
   angular.module('shopApp')
-    .factory('AdminService', function ($http, $q) {
+    .factory('AdminService', function ($http, $q, baseUrl) {
 
       var token={};
 
@@ -11,7 +11,7 @@
         credentials.password=md5(credentials.password);
 
         return $q(function(resolve){
-          $http.post('http://localhost:3010/authenticate',credentials).then(function (result){
+          $http.post(baseUrl+'/authenticate',credentials).then(function (result){
 
             console.log(result);
 
