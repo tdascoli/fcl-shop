@@ -155,7 +155,7 @@ $app->get('/orders/{id}', function (Request $request, Response $response) {
 
 $app->post('/orders', function (Request $request, Response $response) {
   $data = $request->getParsedBody();
-  $confirmed=true;
+
   $db = getConnection();
 
   // INSERT ORDER
@@ -165,7 +165,7 @@ $app->post('/orders', function (Request $request, Response $response) {
   $sth->bindParam("address", $data['address']);
   $sth->bindParam("email", $data['email']);
   $sth->bindParam("phone", $data['phone']);
-  $sth->bindParam("confirmed", $confirmed);
+  $sth->bindParam("phone", $data['phone']);
   $sth->execute();
 
   $order_id = $db->lastInsertId();
