@@ -75,7 +75,7 @@ function sendOrderEMail($data,$order_id){
           <p>Dieses E-Mail wurde automatisch generiert. Bitte beantworten Sie es nicht.</p>
           <hr />
           Vielen Dank f&uuml;r Ihre Bestellung im Beef-Shop Schüpfenried.<p />
-          <a href="http://www.schuepfenried.ch/shop/#/order/'.$order_id.'">Ihre Bestell-Nummer lautet: <strong>'.$order_id.'</strong></a><p />
+          <a href="http://www.schuepfenried.ch/shop/#!/order/'.$order_id.'">Ihre Bestell-Nummer lautet: <strong>'.$order_id.'</strong></a><p />
           <ul>
             <li>Sobald die Ware abholbereit ist, bekommen Sie <strong>vom Bauernhof Schüpfenried</strong> eine Nachricht</li>
             <li>Die Ware muss auf dem <strong>Bauernhof Schüpfenried</strong> abgeholt und auch bezahlt werden</li>
