@@ -21,6 +21,9 @@ $app->add(function ($req, $res, $next) {
 });
 
 // FUNCTIONS
+function sendConfirmtionEMAil($data,$order_hash){
+  // todo
+}
 function sendOrderEMail($data,$order_id){
   $betreff = 'Ihre Bestellung im Beef-Shop Schüpfenried';
   $bestellung='';
